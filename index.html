@@ -1,0 +1,1128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>艾毓灵 & 瑶瑶 · 订婚之礼</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  /* ===== CSS Variables ===== */
+  :root {
+    --color-primary: #8B1A2B;
+    --color-accent: #D4A574;
+    --color-bg: #FAF8F5;
+    --color-card: #FFFFFF;
+    --color-text: #2D2D2D;
+    --color-muted: #6B6B6B;
+    --color-border: #E8D5C4;
+    --color-letter: #FDF8F0;
+    --color-done: #5B8C5A;
+    --color-primary-light: #A52A3B;
+    --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
+    --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
+    --shadow-lg: 0 8px 40px rgba(0,0,0,0.12);
+    --radius: 16px;
+    --radius-sm: 10px;
+  }
+
+  /* ===== Reset & Base ===== */
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--color-bg);
+    color: var(--color-text);
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* ===== Section Container ===== */
+  .section {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  /* ===== Hero ===== */
+  .hero {
+    text-align: center;
+    padding: 80px 24px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(212,165,116,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+  }
+
+  .hero-date {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 15px;
+    color: var(--color-accent);
+    letter-spacing: 4px;
+    margin-bottom: 20px;
+    position: relative;
+  }
+
+  .hero-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(28px, 5vw, 40px);
+    font-weight: 700;
+    color: var(--color-primary);
+    margin-bottom: 12px;
+    position: relative;
+  }
+
+  .hero-sub {
+    font-size: 16px;
+    color: var(--color-muted);
+    position: relative;
+  }
+
+  .hero-decor {
+    display: block;
+    margin: 24px auto 0;
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+    border-radius: 1px;
+  }
+
+  .scroll-hint {
+    margin-top: 40px;
+    animation: bounce 2s infinite;
+    position: relative;
+  }
+
+  .scroll-hint svg {
+    width: 28px;
+    height: 28px;
+    stroke: var(--color-accent);
+    opacity: 0.7;
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(8px); }
+  }
+
+  /* ===== Mode Tabs ===== */
+  .mode-tabs {
+    display: flex;
+    justify-content: center;
+    gap: 4px;
+    margin-bottom: 32px;
+    background: var(--color-card);
+    border-radius: 30px;
+    padding: 4px;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .mode-tab {
+    flex: 1;
+    max-width: 160px;
+    padding: 10px 20px;
+    border: none;
+    background: transparent;
+    border-radius: 26px;
+    font-size: 15px;
+    cursor: pointer;
+    color: var(--color-muted);
+    transition: all 0.3s ease;
+    font-family: inherit;
+  }
+
+  .mode-tab.active {
+    background: var(--color-primary);
+    color: #fff;
+    box-shadow: 0 2px 12px rgba(139,26,43,0.3);
+  }
+
+  /* ===== Card Carousel ===== */
+  .carousel-wrap {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .carousel-container {
+    flex: 1;
+    overflow: hidden;
+    border-radius: var(--radius);
+    touch-action: pan-y;
+  }
+
+  .carousel-track {
+    display: flex;
+    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
+  }
+
+  .flow-card {
+    flex: 0 0 100%;
+    background: var(--color-card);
+    border-radius: var(--radius);
+    padding: 36px 28px;
+    box-shadow: var(--shadow-md);
+    text-align: center;
+    position: relative;
+    min-height: 180px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+  }
+
+  .flow-card .step-num {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 13px;
+    color: var(--color-accent);
+    letter-spacing: 2px;
+    margin-bottom: 6px;
+  }
+
+  .flow-card .step-icon {
+    font-size: 40px;
+    margin-bottom: 10px;
+    line-height: 1;
+  }
+
+  .flow-card .step-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 4px;
+  }
+
+  .flow-card .step-note {
+    font-size: 14px;
+    color: var(--color-muted);
+  }
+
+  .flow-card .check-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid var(--color-border);
+    background: transparent;
+    cursor: pointer;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    color: transparent;
+  }
+
+  .flow-card .check-btn.checked {
+    background: var(--color-done);
+    border-color: var(--color-done);
+    color: #fff;
+  }
+
+  /* Nav arrows */
+  .carousel-arrow {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1.5px solid var(--color-border);
+    background: var(--color-card);
+    cursor: pointer;
+    font-size: 18px;
+    color: var(--color-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .carousel-arrow:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  .carousel-arrow:active {
+    transform: scale(0.95);
+  }
+
+  /* Dots */
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 48px;
+  }
+
+  .carousel-dots .dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--color-border);
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .carousel-dots .dot.active {
+    background: var(--color-primary);
+    width: 24px;
+    border-radius: 4px;
+  }
+
+  /* ===== Checklist Mode ===== */
+  .checklist-wrap {
+    display: none;
+    margin-bottom: 48px;
+  }
+
+  .checklist-wrap.active {
+    display: block;
+  }
+
+  .carousel-wrap.active {
+    display: flex;
+  }
+
+  .carousel-dots.active {
+    display: flex;
+  }
+
+  .checklist-progress {
+    margin-bottom: 20px;
+  }
+
+  .progress-bar {
+    height: 6px;
+    background: var(--color-border);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 6px;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+    border-radius: 3px;
+    transition: width 0.4s ease;
+  }
+
+  .progress-text {
+    font-size: 13px;
+    color: var(--color-muted);
+    text-align: right;
+  }
+
+  .checklist {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .checklist li {
+    background: var(--color-card);
+    border-radius: var(--radius-sm);
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    transition: all 0.3s ease;
+    user-select: none;
+  }
+
+  .checklist li:active {
+    transform: scale(0.99);
+  }
+
+  .checklist .cl-num {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 13px;
+    color: var(--color-accent);
+    min-width: 20px;
+  }
+
+  .checklist .cl-icon {
+    font-size: 24px;
+  }
+
+  .checklist .cl-text {
+    flex: 1;
+    font-size: 15px;
+  }
+
+  .checklist .cl-check {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 2px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    flex-shrink: 0;
+  }
+
+  .checklist li.checked .cl-check {
+    background: var(--color-done);
+    border-color: var(--color-done);
+  }
+
+  .checklist li.checked .cl-check::after {
+    content: '✓';
+    color: #fff;
+    font-size: 14px;
+    font-weight: 700;
+  }
+
+  .checklist li.checked .cl-text {
+    text-decoration: line-through;
+    color: var(--color-muted);
+    opacity: 0.7;
+  }
+
+  /* ===== Letter Section ===== */
+  .letter-section {
+    padding: 60px 0 40px;
+    position: relative;
+  }
+
+  .letter-section::before {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 1px;
+    background: var(--color-border);
+    margin: 0 auto 60px;
+  }
+
+  .letter-heading {
+    text-align: center;
+    font-family: 'Noto Serif SC', serif;
+    font-size: 22px;
+    color: var(--color-primary);
+    margin-bottom: 32px;
+  }
+
+  /* ===== Envelope ===== */
+  .envelope-wrap {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 32px;
+  }
+
+  .envelope {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    height: 240px;
+    cursor: pointer;
+    perspective: 800px;
+  }
+
+  .envelope-body {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, #E8D5C4 0%, #D4B896 100%);
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+    overflow: hidden;
+    transition: transform 0.4s ease, box-shadow 0.4s ease;
+  }
+
+  .envelope:hover .envelope-body {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* Envelope fold triangle */
+  .envelope-flap {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 140px;
+    background: linear-gradient(135deg, #D4B896 0%, #C4A67A 100%);
+    clip-path: polygon(0 0, 50% 100%, 100% 0);
+    border-radius: 12px 12px 0 0;
+    transform-origin: top center;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 2;
+  }
+
+  .envelope.opened .envelope-flap {
+    transform: rotateX(180deg);
+  }
+
+  /* Seal */
+  .seal {
+    position: absolute;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 44px;
+    height: 44px;
+    background: var(--color-primary);
+    border-radius: 50%;
+    z-index: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 13px;
+    font-family: 'Noto Serif SC', serif;
+    box-shadow: 0 2px 8px rgba(139,26,43,0.5);
+    transition: all 0.5s ease;
+  }
+
+  .envelope.opened .seal {
+    transform: translateX(-50%) scale(0);
+    opacity: 0;
+  }
+
+  /* Envelope label */
+  .envelope-label {
+    position: absolute;
+    bottom: 36px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Noto Serif SC', serif;
+    font-size: 15px;
+    color: var(--color-primary);
+    letter-spacing: 3px;
+    z-index: 1;
+    transition: opacity 0.4s ease;
+  }
+
+  .envelope.opened .envelope-label {
+    opacity: 0;
+  }
+
+  .envelope-hint {
+    position: absolute;
+    bottom: 12px;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 12px;
+    color: var(--color-muted);
+    z-index: 1;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+
+  /* ===== Letter Content ===== */
+  .letter-content {
+    display: none;
+    max-width: 560px;
+    margin: 0 auto;
+    animation: fadeInUp 0.6s ease;
+  }
+
+  .letter-content.visible {
+    display: block;
+  }
+
+  @keyframes fadeInUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .letter-paper {
+    background: var(--color-letter);
+    border-radius: 8px;
+    padding: 40px 32px;
+    box-shadow: var(--shadow-md);
+    position: relative;
+    min-height: 320px;
+    /* Lined paper effect */
+    background-image:
+      repeating-linear-gradient(
+        transparent,
+        transparent 31px,
+        rgba(212,165,116,0.15) 31px,
+        rgba(212,165,116,0.15) 32px
+      );
+    background-position: 0 60px;
+  }
+
+  .letter-paper::before {
+    content: '';
+    position: absolute;
+    left: 40px;
+    top: 0;
+    bottom: 0;
+    width: 1px;
+    background: rgba(212,165,116,0.2);
+  }
+
+  .letter-page {
+    font-family: 'Ma Shan Zheng', cursive;
+    font-size: 20px;
+    line-height: 2;
+    color: #3D2B1F;
+  }
+
+  .letter-page p {
+    margin-bottom: 12px;
+  }
+
+  .letter-page .salutation {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+
+  .letter-page .signature {
+    text-align: right;
+    margin-top: 24px;
+    font-size: 18px;
+  }
+
+  /* Page nav */
+  .letter-pages-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    margin-top: 20px;
+  }
+
+  .letter-page-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1.5px solid var(--color-border);
+    background: var(--color-card);
+    cursor: pointer;
+    font-size: 16px;
+    color: var(--color-text);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+  }
+
+  .letter-page-btn:hover {
+    border-color: var(--color-primary);
+    color: var(--color-primary);
+  }
+
+  .letter-page-btn:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  .letter-page-indicator {
+    font-size: 13px;
+    color: var(--color-muted);
+  }
+
+  /* ===== Quote Cards ===== */
+  .quotes-wrap {
+    max-width: 560px;
+    margin: 32px auto 0;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .quote-card {
+    background: var(--color-card);
+    border-left: 3px solid var(--color-accent);
+    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+    padding: 16px 20px;
+    box-shadow: var(--shadow-sm);
+    position: relative;
+  }
+
+  .quote-card::before {
+    content: '"';
+    position: absolute;
+    top: -6px;
+    left: 12px;
+    font-family: 'Noto Serif SC', serif;
+    font-size: 32px;
+    color: var(--color-accent);
+    opacity: 0.4;
+    line-height: 1;
+  }
+
+  .quote-card .quote-text {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 15px;
+    color: var(--color-text);
+    line-height: 1.8;
+    padding-left: 8px;
+    padding-top: 8px;
+  }
+
+  @media (min-width: 768px) {
+    .quotes-wrap {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+
+  /* ===== Footer ===== */
+  .footer {
+    text-align: center;
+    padding: 60px 24px 40px;
+    color: var(--color-muted);
+    font-size: 14px;
+  }
+
+  .footer-heart {
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+
+  /* ===== Desktop adjustments ===== */
+  @media (min-width: 768px) {
+    .section {
+      padding: 0 32px;
+    }
+
+    .flow-card {
+      padding: 48px 40px;
+      min-height: 200px;
+    }
+
+    .flow-card .step-title {
+      font-size: 22px;
+    }
+
+    .carousel-arrow {
+      width: 48px;
+      height: 48px;
+    }
+
+    .letter-paper {
+      padding: 48px 48px 48px 56px;
+    }
+
+    .letter-paper::before {
+      left: 48px;
+    }
+  }
+
+  /* ===== Hidden states ===== */
+  .hidden {
+    display: none !important;
+  }
+
+  /* ===== Check pulse animation ===== */
+  @keyframes checkPop {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.2); }
+    100% { transform: scale(1); }
+  }
+
+  .check-pop {
+    animation: checkPop 0.3s ease;
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== Hero ===== -->
+<header class="hero">
+  <p class="hero-date">2026 · 08 · 02</p>
+  <h1 class="hero-title">艾毓灵 &amp; 瑶瑶</h1>
+  <p class="hero-sub">订婚之礼</p>
+  <span class="hero-decor"></span>
+  <div class="scroll-hint">
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M12 5v14M5 12l7 7 7-7"/>
+    </svg>
+  </div>
+</header>
+
+<!-- ===== Main Content ===== -->
+<main class="section">
+
+  <!-- ===== Mode Tabs ===== -->
+  <div class="mode-tabs">
+    <button class="mode-tab active" data-mode="card">📸 卡片浏览</button>
+    <button class="mode-tab" data-mode="list">✅ 互动清单</button>
+  </div>
+
+  <!-- ===== Card Carousel ===== -->
+  <div class="carousel-wrap active" id="carouselWrap">
+    <button class="carousel-arrow" id="prevBtn" aria-label="上一张">◂</button>
+    <div class="carousel-container" id="carouselContainer">
+      <div class="carousel-track" id="carouselTrack">
+        <!-- Cards injected by JS -->
+      </div>
+    </div>
+    <button class="carousel-arrow" id="nextBtn" aria-label="下一张">▸</button>
+  </div>
+
+  <!-- Dots -->
+  <div class="carousel-dots active" id="carouselDots"></div>
+
+  <!-- ===== Checklist ===== -->
+  <div class="checklist-wrap" id="checklistWrap">
+    <div class="checklist-progress">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progressFill" style="width:0%"></div>
+      </div>
+      <p class="progress-text" id="progressText">已完成 0/12</p>
+    </div>
+    <ul class="checklist" id="checklist">
+      <!-- Injected by JS -->
+    </ul>
+  </div>
+
+  <!-- ===== Letter Section ===== -->
+  <section class="letter-section">
+    <h2 class="letter-heading">给瑶瑶爸爸妈妈的一封信</h2>
+
+    <!-- Envelope -->
+    <div class="envelope-wrap" id="envelopeWrap">
+      <div class="envelope" id="envelope">
+        <div class="envelope-body">
+          <div class="envelope-flap"></div>
+          <div class="seal">缄</div>
+          <p class="envelope-label">瑶瑶爸爸妈妈&ensp;亲启</p>
+          <p class="envelope-hint">点击打开</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Letter Pages -->
+    <div class="letter-content" id="letterContent">
+      <div class="letter-paper">
+        <!-- Page 1: salutation + para 1-2 -->
+        <div class="letter-page" data-page="0">
+          <p class="salutation">你好叔叔，阿姨！</p>
+          <p>我是小艾，感觉是一下子闯入你们家人的一个人。在今日要和瑶瑶正式订婚。非常感谢你们的付出，让一位非常好的人可以成为我的未来的妻子。你们肯定也吃了很多苦，一下子将家里的三位小孩都抚养成人，并且成才。你们真的辛苦了，非常感谢你们！</p>
+          <p>我相信瑶瑶是一位很好的人，很值得托付后背的人，也是对我很好的人。瑶瑶在我心里的分量真的很重很重，是不知不觉地就占据了心里的高地的那种。所以我也不希望瑶瑶再哭泣，反而可以在我这里发发歪歪。</p>
+        </div>
+        <!-- Page 2: para 3-4 -->
+        <div class="letter-page hidden" data-page="1">
+          <p>瑶瑶真的很爱你们，爱瑶瑶的爸爸妈妈，爱瑶瑶的妹妹，爱瑶瑶的弟弟。都是自己的至亲哪有不爱的呢？都是瑶瑶爱的人，那就要多多放在心里爱她。因为瑶瑶不仅是你们的女儿，也是姐姐，同时也是我的未来共度余生的妻子。你看瑶瑶多幸福，那么多人爱她。请真的多多爱她，我一个人爱瑶瑶可是会抢过你们对她的爱哦！哈哈哈哈哈哈。</p>
+          <p>瑶瑶无论在哪里，都会希望有家人在身边。瑶瑶真的很好很好！</p>
+        </div>
+        <!-- Page 3: para 5-6 + signature -->
+        <div class="letter-page hidden" data-page="2">
+          <p>我家里有位哲人说过一句话："大家都好好过，不是一个人的小家过好，是我们的家都过好，每一个人的小家过好，我们的整个大家就会更好。"叔叔阿姨也和和睦睦的，我和瑶瑶也恩恩爱爱的，妹妹和弟弟也互相帮助互相关心。我们整个家都会很好的。都会有的，什么都会有的。</p>
+          <p>我会对瑶瑶好好的，我会和瑶瑶认认真真地过日子的。我们都踏踏实实的，脚踏实地的。只是叔叔阿姨给我和瑶瑶一些时间，如今我也要准备入学了，瑶瑶也刚刚正式开始工作。我们一切都刚刚开始。所以我估计又要出国读书，因此我想在订婚后，在出国前先和瑶瑶正式地把结婚证领了。望叔叔阿姨的批准。也算正式给瑶瑶一个交代。我很早就和瑶瑶说了，我在国外读书就像是一个风筝，风筝线永远都在国内，抓住风筝线的那个手永远都是瑶瑶的手。</p>
+          <p>非常感谢你们对瑶瑶的爱，所以不要吝啬，请再多多爱我们。</p>
+          <p>再次郑重地和叔叔阿姨说一声谢谢。</p>
+          <p class="signature">2026年8月2日&ensp;贵溪<br>艾毓灵</p>
+        </div>
+      </div>
+
+      <!-- Page Nav -->
+      <div class="letter-pages-nav">
+        <button class="letter-page-btn" id="letterPrev" disabled>◂</button>
+        <span class="letter-page-indicator" id="letterPageIndicator">1 / 3</span>
+        <button class="letter-page-btn" id="letterNext">▸</button>
+      </div>
+    </div>
+
+    <!-- Quote Cards -->
+    <div class="quotes-wrap">
+      <div class="quote-card">
+        <p class="quote-text">瑶瑶在我心里的分量真的很重很重</p>
+      </div>
+      <div class="quote-card">
+        <p class="quote-text">风筝线永远都在国内，抓住风筝线的那个手永远都是瑶瑶的手</p>
+      </div>
+      <div class="quote-card">
+        <p class="quote-text">请再多多爱我们</p>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<!-- ===== Footer ===== -->
+<footer class="footer">
+  <p class="footer-heart">💝</p>
+  <p>艾毓灵 &amp; 瑶瑶 · 订婚之礼 · 2026年8月2日 · 贵溪</p>
+</footer>
+
+<!-- ===== JavaScript ===== -->
+<script>
+(function() {
+  // ===== Data =====
+  const steps = [
+    { icon: '🎁', title: '男方提聘礼上门', note: '带着聘礼，正式登门' },
+    { icon: '🍽️', title: '女方准备一桌饭', note: '家里备好饭菜，迎客入席' },
+    { icon: '🍵', title: '大家喝茶坐', note: '坐下喝茶，聊聊天' },
+    { icon: '🧧', title: '开始提彩礼，给红包', note: '彩礼红包，诚意满满' },
+    { icon: '💝', title: '给弟弟妹妹见面礼', note: '一家人就是要整整齐齐' },
+    { icon: '📷', title: '拍照', note: '记录下这个重要的日子' },
+    { icon: '🥢', title: '吃饭（酒店送）', note: '共进午餐，其乐融融' },
+    { icon: '☕', title: '吃完饭喝点茶中坐聊聊天', note: '饭后茶叙，闲话家常' },
+    { icon: '💰', title: '出发前的打发红包', note: '临别红包，礼节周全' },
+    { icon: '🚗', title: '1点半左右出发回永丰', note: '收拾行装，启程回家' },
+    { icon: '📦', title: '布置东西收拾带走', note: '整理好所有物品' },
+    { icon: '🏠', title: '毓灵在家', note: '回到家中，圆满礼成' }
+  ];
+
+  // ===== State =====
+  const STORAGE_KEY = 'engagement_checklist';
+  let checkedState = new Array(steps.length).fill(false);
+  let currentCard = 0;
+  let currentLetterPage = 0;
+  let envelopeOpened = false;
+  let touchStartX = 0;
+  let touchStartY = 0;
+
+  // Load saved state
+  try {
+    const saved = localStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      const parsed = JSON.parse(saved);
+      if (Array.isArray(parsed) && parsed.length === steps.length) {
+        checkedState = parsed;
+      }
+    }
+  } catch(e) { /* ignore */ }
+
+  function saveState() {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(checkedState));
+    } catch(e) { /* ignore */ }
+  }
+
+  // ===== DOM Refs =====
+  const carouselTrack = document.getElementById('carouselTrack');
+  const carouselDots = document.getElementById('carouselDots');
+  const carouselWrap = document.getElementById('carouselWrap');
+  const checklistWrap = document.getElementById('checklistWrap');
+  const checklistEl = document.getElementById('checklist');
+  const progressFill = document.getElementById('progressFill');
+  const progressText = document.getElementById('progressText');
+  const envelope = document.getElementById('envelope');
+  const envelopeWrap = document.getElementById('envelopeWrap');
+  const letterContent = document.getElementById('letterContent');
+  const letterPrev = document.getElementById('letterPrev');
+  const letterNext = document.getElementById('letterNext');
+  const letterPageIndicator = document.getElementById('letterPageIndicator');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const carouselContainer = document.getElementById('carouselContainer');
+
+  // ===== Build Cards =====
+  function buildCards() {
+    carouselTrack.innerHTML = steps.map((s, i) => `
+      <div class="flow-card">
+        <button class="check-btn${checkedState[i] ? ' checked' : ''}" data-index="${i}" aria-label="标记完成">
+          ${checkedState[i] ? '✓' : ''}
+        </button>
+        <span class="step-num">第 ${i + 1} 步</span>
+        <span class="step-icon">${s.icon}</span>
+        <h3 class="step-title">${s.title}</h3>
+        <p class="step-note">${s.note}</p>
+      </div>
+    `).join('');
+
+    // Dots
+    carouselDots.innerHTML = steps.map((_, i) => `
+      <span class="dot${i === 0 ? ' active' : ''}" data-index="${i}"></span>
+    `).join('');
+  }
+
+  // ===== Build Checklist =====
+  function buildChecklist() {
+    checklistEl.innerHTML = steps.map((s, i) => `
+      <li data-index="${i}" class="${checkedState[i] ? 'checked' : ''}">
+        <span class="cl-num">${String(i + 1).padStart(2, '0')}</span>
+        <span class="cl-icon">${s.icon}</span>
+        <span class="cl-text">${s.title}</span>
+        <span class="cl-check"></span>
+      </li>
+    `).join('');
+    updateProgress();
+  }
+
+  function updateProgress() {
+    const done = checkedState.filter(Boolean).length;
+    const pct = (done / steps.length) * 100;
+    progressFill.style.width = pct + '%';
+    progressText.textContent = `已完成 ${done}/${steps.length}`;
+  }
+
+  // ===== Card Navigation =====
+  function goToCard(index) {
+    if (index < 0 || index >= steps.length) return;
+    currentCard = index;
+    carouselTrack.style.transform = `translateX(-${index * 100}%)`;
+
+    // Update dots
+    carouselDots.querySelectorAll('.dot').forEach((d, i) => {
+      d.classList.toggle('active', i === index);
+    });
+  }
+
+  // Arrow buttons
+  prevBtn.addEventListener('click', () => goToCard(currentCard - 1));
+  nextBtn.addEventListener('click', () => goToCard(currentCard + 1));
+
+  // Dots click
+  carouselDots.addEventListener('click', (e) => {
+    const dot = e.target.closest('.dot');
+    if (!dot) return;
+    goToCard(parseInt(dot.dataset.index));
+  });
+
+  // Keyboard
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowLeft') goToCard(currentCard - 1);
+    if (e.key === 'ArrowRight') goToCard(currentCard + 1);
+  });
+
+  // Touch swipe for carousel
+  carouselContainer.addEventListener('touchstart', (e) => {
+    touchStartX = e.touches[0].clientX;
+    touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+
+  carouselContainer.addEventListener('touchend', (e) => {
+    const dx = e.changedTouches[0].clientX - touchStartX;
+    const dy = e.changedTouches[0].clientY - touchStartY;
+    // Only if horizontal swipe dominates
+    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+      if (dx < 0) goToCard(currentCard + 1);
+      else goToCard(currentCard - 1);
+    }
+  });
+
+  // ===== Check Toggle =====
+  function toggleCheck(index) {
+    checkedState[index] = !checkedState[index];
+    saveState();
+    syncAllUI();
+  }
+
+  function syncAllUI() {
+    // Cards
+    carouselTrack.querySelectorAll('.flow-card').forEach((card, i) => {
+      const btn = card.querySelector('.check-btn');
+      if (checkedState[i]) {
+        btn.classList.add('checked');
+        btn.textContent = '✓';
+      } else {
+        btn.classList.remove('checked');
+        btn.textContent = '';
+      }
+    });
+
+    // Checklist
+    checklistEl.querySelectorAll('li').forEach((li, i) => {
+      li.classList.toggle('checked', checkedState[i]);
+    });
+
+    updateProgress();
+  }
+
+  // Card check button clicks
+  carouselTrack.addEventListener('click', (e) => {
+    const btn = e.target.closest('.check-btn');
+    if (!btn) return;
+    btn.classList.add('check-pop');
+    setTimeout(() => btn.classList.remove('check-pop'), 300);
+    toggleCheck(parseInt(btn.dataset.index));
+  });
+
+  // Checklist item clicks
+  checklistEl.addEventListener('click', (e) => {
+    const li = e.target.closest('li');
+    if (!li) return;
+    toggleCheck(parseInt(li.dataset.index));
+  });
+
+  // ===== Mode Switching =====
+  const modeTabs = document.querySelectorAll('.mode-tab');
+  modeTabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      const mode = tab.dataset.mode;
+      modeTabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+
+      if (mode === 'card') {
+        carouselWrap.classList.add('active');
+        carouselWrap.style.display = 'flex';
+        carouselDots.classList.add('active');
+        carouselDots.style.display = 'flex';
+        checklistWrap.classList.remove('active');
+        checklistWrap.style.display = 'none';
+      } else {
+        carouselWrap.classList.remove('active');
+        carouselWrap.style.display = 'none';
+        carouselDots.classList.remove('active');
+        carouselDots.style.display = 'none';
+        checklistWrap.classList.add('active');
+        checklistWrap.style.display = 'block';
+      }
+    });
+  });
+
+  // ===== Envelope =====
+  envelope.addEventListener('click', () => {
+    if (envelopeOpened) return;
+    envelopeOpened = true;
+    envelope.classList.add('opened');
+
+    // Delay showing letter content to let envelope animation finish
+    setTimeout(() => {
+      envelopeWrap.style.display = 'none';
+      letterContent.classList.add('visible');
+      showLetterPage(0);
+    }, 800);
+  });
+
+  // ===== Letter Page Navigation =====
+  function showLetterPage(page) {
+    currentLetterPage = page;
+    document.querySelectorAll('.letter-page').forEach((p, i) => {
+      p.classList.toggle('hidden', i !== page);
+    });
+    letterPrev.disabled = page === 0;
+    letterNext.disabled = page === 2;
+    letterPageIndicator.textContent = `${page + 1} / 3`;
+  }
+
+  letterPrev.addEventListener('click', () => {
+    if (currentLetterPage > 0) showLetterPage(currentLetterPage - 1);
+  });
+
+  letterNext.addEventListener('click', () => {
+    if (currentLetterPage < 2) showLetterPage(currentLetterPage + 1);
+  });
+
+  // ===== Init =====
+  buildCards();
+  buildChecklist();
+  goToCard(0);
+
+})();
+</script>
+
+</body>
+</html>
