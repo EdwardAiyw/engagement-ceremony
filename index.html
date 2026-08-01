@@ -6,1120 +6,1107 @@
 <title>艾毓灵 & 瑶瑶 · 订婚之礼</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@300;400;600;700;900&display=swap" rel="stylesheet">
 <style>
-  /* ===== CSS Variables ===== */
   :root {
-    --color-primary: #8B1A2B;
-    --color-accent: #D4A574;
-    --color-bg: #FAF8F5;
-    --color-card: #FFFFFF;
-    --color-text: #2D2D2D;
-    --color-muted: #6B6B6B;
-    --color-border: #E8D5C4;
-    --color-letter: #FDF8F0;
-    --color-done: #5B8C5A;
-    --color-primary-light: #A52A3B;
-    --shadow-sm: 0 2px 8px rgba(0,0,0,0.06);
-    --shadow-md: 0 4px 20px rgba(0,0,0,0.08);
-    --shadow-lg: 0 8px 40px rgba(0,0,0,0.12);
-    --radius: 16px;
-    --radius-sm: 10px;
+    --primary: #8B1A2B;
+    --primary-light: #A52235;
+    --accent: #D4A574;
+    --accent-light: #E8C9A8;
+    --bg: #FAF8F5;
+    --bg-alt: #F3EFEA;
+    --text: #1A1A1A;
+    --text-muted: #6B6B6B;
+    --white: #FFFFFF;
+    --letter-bg: #FDF8F0;
   }
 
-  /* ===== Reset & Base ===== */
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-  html { scroll-behavior: smooth; }
+  html {
+    scroll-behavior: smooth;
+    scroll-snap-type: y mandatory;
+    overflow-y: scroll;
+    scrollbar-width: none;
+  }
+  html::-webkit-scrollbar { display: none; }
 
   body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-    background: var(--color-bg);
-    color: var(--color-text);
-    line-height: 1.7;
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    background: var(--bg);
+    color: var(--text);
     -webkit-font-smoothing: antialiased;
-    overflow-x: hidden;
   }
 
-  /* ===== Section Container ===== */
-  .section {
-    max-width: 680px;
-    margin: 0 auto;
-    padding: 0 24px;
-  }
-
-  /* ===== Hero ===== */
-  .hero {
-    text-align: center;
-    padding: 80px 24px 60px;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: -60px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 200px;
-    height: 200px;
-    background: radial-gradient(circle, rgba(212,165,116,0.15) 0%, transparent 70%);
-    border-radius: 50%;
-  }
-
-  .hero-date {
-    font-family: 'Noto Serif SC', serif;
-    font-size: 15px;
-    color: var(--color-accent);
-    letter-spacing: 4px;
-    margin-bottom: 20px;
-    position: relative;
-  }
-
-  .hero-title {
-    font-family: 'Noto Serif SC', serif;
-    font-size: clamp(28px, 5vw, 40px);
-    font-weight: 700;
-    color: var(--color-primary);
-    margin-bottom: 12px;
-    position: relative;
-  }
-
-  .hero-sub {
-    font-size: 16px;
-    color: var(--color-muted);
-    position: relative;
-  }
-
-  .hero-decor {
-    display: block;
-    margin: 24px auto 0;
-    width: 60px;
-    height: 2px;
-    background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
-    border-radius: 1px;
-  }
-
-  .scroll-hint {
-    margin-top: 40px;
-    animation: bounce 2s infinite;
-    position: relative;
-  }
-
-  .scroll-hint svg {
-    width: 28px;
-    height: 28px;
-    stroke: var(--color-accent);
-    opacity: 0.7;
-  }
-
-  @keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(8px); }
-  }
-
-  /* ===== Mode Tabs ===== */
-  .mode-tabs {
-    display: flex;
-    justify-content: center;
-    gap: 4px;
-    margin-bottom: 32px;
-    background: var(--color-card);
-    border-radius: 30px;
-    padding: 4px;
-    box-shadow: var(--shadow-sm);
-  }
-
-  .mode-tab {
-    flex: 1;
-    max-width: 160px;
-    padding: 10px 20px;
-    border: none;
-    background: transparent;
-    border-radius: 26px;
-    font-size: 15px;
-    cursor: pointer;
-    color: var(--color-muted);
-    transition: all 0.3s ease;
-    font-family: inherit;
-  }
-
-  .mode-tab.active {
-    background: var(--color-primary);
-    color: #fff;
-    box-shadow: 0 2px 12px rgba(139,26,43,0.3);
-  }
-
-  /* ===== Card Carousel ===== */
-  .carousel-wrap {
-    position: relative;
+  /* ===== Fullscreen Section ===== */
+  .screen {
+    min-height: 100vh;
+    min-height: 100dvh;
+    scroll-snap-align: start;
     display: flex;
     align-items: center;
-    gap: 12px;
-    margin-bottom: 24px;
-  }
-
-  .carousel-container {
-    flex: 1;
-    overflow: hidden;
-    border-radius: var(--radius);
-    touch-action: pan-y;
-  }
-
-  .carousel-track {
-    display: flex;
-    transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    will-change: transform;
-  }
-
-  .flow-card {
-    flex: 0 0 100%;
-    background: var(--color-card);
-    border-radius: var(--radius);
-    padding: 36px 28px;
-    box-shadow: var(--shadow-md);
-    text-align: center;
+    justify-content: center;
     position: relative;
-    min-height: 180px;
+    overflow: hidden;
+    padding: 40px 24px;
+  }
+
+  /* ===== Progress Sidebar ===== */
+  .progress-side {
+    position: fixed;
+    right: 28px;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 100;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-    user-select: none;
+    gap: 10px;
   }
-
-  .flow-card .step-num {
-    font-family: 'Noto Serif SC', serif;
-    font-size: 13px;
-    color: var(--color-accent);
-    letter-spacing: 2px;
-    margin-bottom: 6px;
-  }
-
-  .flow-card .step-icon {
-    font-size: 40px;
-    margin-bottom: 10px;
-    line-height: 1;
-  }
-
-  .flow-card .step-title {
-    font-family: 'Noto Serif SC', serif;
-    font-size: 20px;
-    font-weight: 600;
-    color: var(--color-text);
-    margin-bottom: 4px;
-  }
-
-  .flow-card .step-note {
-    font-size: 14px;
-    color: var(--color-muted);
-  }
-
-  .flow-card .check-btn {
-    position: absolute;
-    top: 16px;
-    right: 16px;
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    border: 2px solid var(--color-border);
-    background: transparent;
-    cursor: pointer;
-    font-size: 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    color: transparent;
-  }
-
-  .flow-card .check-btn.checked {
-    background: var(--color-done);
-    border-color: var(--color-done);
-    color: #fff;
-  }
-
-  /* Nav arrows */
-  .carousel-arrow {
-    width: 44px;
-    height: 44px;
-    border-radius: 50%;
-    border: 1.5px solid var(--color-border);
-    background: var(--color-card);
-    cursor: pointer;
-    font-size: 18px;
-    color: var(--color-text);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.2s ease;
-    flex-shrink: 0;
-    box-shadow: var(--shadow-sm);
-  }
-
-  .carousel-arrow:hover {
-    border-color: var(--color-primary);
-    color: var(--color-primary);
-  }
-
-  .carousel-arrow:active {
-    transform: scale(0.95);
-  }
-
-  /* Dots */
-  .carousel-dots {
-    display: flex;
-    justify-content: center;
-    gap: 8px;
-    margin-bottom: 48px;
-  }
-
-  .carousel-dots .dot {
+  .progress-side .p-dot {
     width: 8px;
     height: 8px;
     border-radius: 50%;
-    background: var(--color-border);
+    background: #D4C8B8;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
+  }
+  .progress-side .p-dot.active {
+    background: var(--primary);
+    box-shadow: 0 0 0 4px rgba(139,26,43,0.15);
+    width: 10px;
+    height: 10px;
+  }
+  .progress-side .p-dot.done {
+    background: var(--primary);
+    opacity: 0.5;
+  }
+  @media (max-width: 768px) {
+    .progress-side { right: 10px; gap: 8px; }
+    .progress-side .p-dot { width: 6px; height: 6px; }
+    .progress-side .p-dot.active { width: 8px; height: 8px; }
   }
 
-  .carousel-dots .dot.active {
-    background: var(--color-primary);
-    width: 24px;
-    border-radius: 4px;
-  }
-
-  /* ===== Checklist Mode ===== */
-  .checklist-wrap {
-    display: none;
-    margin-bottom: 48px;
-  }
-
-  .checklist-wrap.active {
-    display: block;
-  }
-
-  .carousel-wrap.active {
-    display: flex;
-  }
-
-  .carousel-dots.active {
-    display: flex;
-  }
-
-  .checklist-progress {
-    margin-bottom: 20px;
-  }
-
-  .progress-bar {
-    height: 6px;
-    background: var(--color-border);
-    border-radius: 3px;
-    overflow: hidden;
-    margin-bottom: 6px;
-  }
-
-  .progress-fill {
-    height: 100%;
-    background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
-    border-radius: 3px;
-    transition: width 0.4s ease;
-  }
-
-  .progress-text {
-    font-size: 13px;
-    color: var(--color-muted);
-    text-align: right;
-  }
-
-  .checklist {
-    list-style: none;
-    display: flex;
+  /* ===== Hero Screen ===== */
+  .screen-hero {
+    background: var(--bg);
     flex-direction: column;
-    gap: 8px;
-  }
-
-  .checklist li {
-    background: var(--color-card);
-    border-radius: var(--radius-sm);
-    padding: 16px 20px;
-    display: flex;
-    align-items: center;
-    gap: 14px;
-    cursor: pointer;
-    box-shadow: var(--shadow-sm);
-    transition: all 0.3s ease;
-    user-select: none;
-  }
-
-  .checklist li:active {
-    transform: scale(0.99);
-  }
-
-  .checklist .cl-num {
-    font-family: 'Noto Serif SC', serif;
-    font-size: 13px;
-    color: var(--color-accent);
-    min-width: 20px;
-  }
-
-  .checklist .cl-icon {
-    font-size: 24px;
-  }
-
-  .checklist .cl-text {
-    flex: 1;
-    font-size: 15px;
-  }
-
-  .checklist .cl-check {
-    width: 26px;
-    height: 26px;
-    border-radius: 50%;
-    border: 2px solid var(--color-border);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-    flex-shrink: 0;
-  }
-
-  .checklist li.checked .cl-check {
-    background: var(--color-done);
-    border-color: var(--color-done);
-  }
-
-  .checklist li.checked .cl-check::after {
-    content: '✓';
-    color: #fff;
-    font-size: 14px;
-    font-weight: 700;
-  }
-
-  .checklist li.checked .cl-text {
-    text-decoration: line-through;
-    color: var(--color-muted);
-    opacity: 0.7;
-  }
-
-  /* ===== Letter Section ===== */
-  .letter-section {
-    padding: 60px 0 40px;
-    position: relative;
-  }
-
-  .letter-section::before {
-    content: '';
-    display: block;
-    width: 80px;
-    height: 1px;
-    background: var(--color-border);
-    margin: 0 auto 60px;
-  }
-
-  .letter-heading {
     text-align: center;
+  }
+  .screen-hero::before {
+    content: '';
+    position: absolute;
+    width: 600px; height: 600px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(212,165,116,0.12) 0%, transparent 70%);
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+  .screen-hero .hero-ring {
+    position: absolute;
+    width: 300px; height: 300px;
+    border: 1px solid rgba(212,165,116,0.2);
+    border-radius: 50%;
+    top: calc(50% - 150px);
+    left: calc(50% - 150px);
+    pointer-events: none;
+    animation: ringPulse 4s ease-in-out infinite;
+  }
+  @keyframes ringPulse {
+    0%, 100% { transform: scale(1); opacity: 0.4; }
+    50% { transform: scale(1.08); opacity: 0.15; }
+  }
+  .hero-top-line {
     font-family: 'Noto Serif SC', serif;
-    font-size: 22px;
-    color: var(--color-primary);
+    font-size: clamp(14px, 2vw, 16px);
+    color: var(--accent);
+    letter-spacing: 8px;
     margin-bottom: 32px;
-  }
-
-  /* ===== Envelope ===== */
-  .envelope-wrap {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 32px;
-  }
-
-  .envelope {
     position: relative;
-    width: 100%;
-    max-width: 400px;
-    height: 240px;
-    cursor: pointer;
-    perspective: 800px;
   }
-
-  .envelope-body {
+  .hero-names {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(36px, 8vw, 64px);
+    font-weight: 900;
+    color: var(--primary);
+    line-height: 1.3;
+    position: relative;
+  }
+  .hero-amp {
+    font-weight: 300;
+    font-size: 0.7em;
+    color: var(--accent);
+    display: block;
+  }
+  .hero-subtitle {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(18px, 3.5vw, 26px);
+    color: var(--text);
+    margin-top: 20px;
+    letter-spacing: 6px;
+    position: relative;
+  }
+  .hero-decor {
+    width: 80px; height: 1px;
+    background: var(--accent);
+    margin: 32px auto 0;
+    position: relative;
+  }
+  .scroll-down {
     position: absolute;
-    inset: 0;
-    background: linear-gradient(135deg, #E8D5C4 0%, #D4B896 100%);
-    border-radius: 12px;
-    box-shadow: var(--shadow-md);
-    overflow: hidden;
-    transition: transform 0.4s ease, box-shadow 0.4s ease;
-  }
-
-  .envelope:hover .envelope-body {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
-  }
-
-  /* Envelope fold triangle */
-  .envelope-flap {
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 140px;
-    background: linear-gradient(135deg, #D4B896 0%, #C4A67A 100%);
-    clip-path: polygon(0 0, 50% 100%, 100% 0);
-    border-radius: 12px 12px 0 0;
-    transform-origin: top center;
-    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 2;
-  }
-
-  .envelope.opened .envelope-flap {
-    transform: rotateX(180deg);
-  }
-
-  /* Seal */
-  .seal {
-    position: absolute;
-    top: 100px;
+    bottom: 40px;
     left: 50%;
     transform: translateX(-50%);
-    width: 44px;
-    height: 44px;
-    background: var(--color-primary);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    animation: floatDown 2.5s ease-in-out infinite;
+  }
+  .scroll-down span {
+    font-size: 11px;
+    letter-spacing: 3px;
+    color: var(--text-muted);
+  }
+  .scroll-down svg { width: 22px; height: 22px; stroke: var(--accent); }
+  @keyframes floatDown {
+    0%, 100% { transform: translateX(-50%) translateY(0); opacity: 1; }
+    50% { transform: translateX(-50%) translateY(10px); opacity: 0.5; }
+  }
+
+  /* ===== Step Screen ===== */
+  .screen-step {
+    background: var(--white);
+    flex-direction: column;
+    text-align: center;
+    gap: 16px;
+  }
+  .screen-step:nth-child(even) { background: var(--bg-alt); }
+
+  .step-badge {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 13px;
+    letter-spacing: 4px;
+    color: var(--accent);
+    text-transform: uppercase;
+  }
+  .step-icon-wrap {
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(212,165,116,0.12), rgba(212,165,116,0.04));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 8px 0;
+  }
+  .step-icon-wrap .s-icon {
+    font-size: 52px;
+    line-height: 1;
+  }
+  .step-number {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(48px, 12vw, 96px);
+    font-weight: 900;
+    color: rgba(139,26,43,0.06);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+    user-select: none;
+    line-height: 1;
+  }
+  .step-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(24px, 5vw, 36px);
+    font-weight: 700;
+    color: var(--text);
+    position: relative;
+    z-index: 1;
+  }
+  .step-desc {
+    font-size: clamp(15px, 2.5vw, 17px);
+    color: var(--text-muted);
+    max-width: 400px;
+    line-height: 1.8;
+  }
+  .step-check {
+    margin-top: 16px;
+    width: 56px; height: 56px;
+    border-radius: 50%;
+    border: 2px solid #E0D5C8;
+    background: var(--white);
+    cursor: pointer;
+    font-size: 24px;
+    color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.4s ease;
+    position: relative;
+    z-index: 1;
+  }
+  .step-check:hover {
+    border-color: var(--primary);
+  }
+  .step-check.done {
+    background: #5B8C5A;
+    border-color: #5B8C5A;
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(91,140,90,0.3);
+  }
+  .step-nav-hint {
+    position: absolute;
+    bottom: 36px;
+    font-size: 12px;
+    color: #C4B8A8;
+    letter-spacing: 2px;
+  }
+
+  /* Background number watermark */
+  .screen-step .bg-num {
+    position: absolute;
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(120px, 25vw, 240px);
+    font-weight: 900;
+    color: rgba(0,0,0,0.015);
+    pointer-events: none;
+    user-select: none;
+    line-height: 1;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  /* ===== Envelope Screen ===== */
+  .screen-envelope {
+    background: linear-gradient(180deg, #F3EFEA 0%, #E8E0D5 100%);
+    flex-direction: column;
+    text-align: center;
+  }
+  .envelope-heading {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(20px, 4vw, 28px);
+    color: var(--primary);
+    margin-bottom: 48px;
+    letter-spacing: 4px;
+  }
+  .envelope-big {
+    position: relative;
+    width: min(440px, 85vw);
+    height: 280px;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  .envelope-big:hover { transform: translateY(-6px); }
+  .envelope-big .env-body {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(145deg, #EAD9C5, #D4B896);
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.1), 0 4px 16px rgba(0,0,0,0.06);
+    overflow: hidden;
+  }
+  .envelope-big .env-body::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(45deg, transparent 48%, rgba(255,255,255,0.03) 48%, rgba(255,255,255,0.03) 52%, transparent 52%),
+      linear-gradient(-45deg, transparent 48%, rgba(0,0,0,0.02) 48%, rgba(0,0,0,0.02) 52%, transparent 52%);
+    background-size: 40px 40px;
+  }
+  .envelope-big .env-flap {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 170px;
+    background: linear-gradient(160deg, #D4B896, #C4A67A);
+    clip-path: polygon(0 0, 50% 100%, 100% 0);
+    border-radius: 20px 20px 0 0;
+    transform-origin: top center;
+    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 2;
+  }
+  .envelope-big.opened .env-flap {
+    transform: rotateX(180deg);
+  }
+  .envelope-big .env-seal {
+    position: absolute;
+    top: 118px; left: 50%;
+    transform: translateX(-50%);
+    width: 56px; height: 56px;
+    background: var(--primary);
     border-radius: 50%;
     z-index: 3;
     display: flex;
     align-items: center;
     justify-content: center;
     color: #fff;
-    font-size: 13px;
     font-family: 'Noto Serif SC', serif;
-    box-shadow: 0 2px 8px rgba(139,26,43,0.5);
+    font-size: 16px;
+    box-shadow: 0 4px 16px rgba(139,26,43,0.4);
     transition: all 0.5s ease;
   }
-
-  .envelope.opened .seal {
+  .envelope-big.opened .env-seal {
     transform: translateX(-50%) scale(0);
     opacity: 0;
   }
-
-  /* Envelope label */
-  .envelope-label {
+  .envelope-big .env-to {
     position: absolute;
-    bottom: 36px;
+    bottom: 42px;
     left: 50%;
     transform: translateX(-50%);
     font-family: 'Noto Serif SC', serif;
-    font-size: 15px;
-    color: var(--color-primary);
-    letter-spacing: 3px;
+    font-size: clamp(18px, 3vw, 22px);
+    color: var(--primary);
+    letter-spacing: 6px;
     z-index: 1;
     transition: opacity 0.4s ease;
   }
-
-  .envelope.opened .envelope-label {
-    opacity: 0;
-  }
-
-  .envelope-hint {
+  .envelope-big.opened .env-to { opacity: 0; }
+  .envelope-big .env-tap {
     position: absolute;
-    bottom: 12px;
+    bottom: 14px;
     left: 50%;
     transform: translateX(-50%);
-    font-size: 12px;
-    color: var(--color-muted);
+    font-size: 13px;
+    color: var(--text-muted);
     z-index: 1;
     animation: pulse 2s infinite;
   }
-
   @keyframes pulse {
-    0%, 100% { opacity: 0.5; }
+    0%, 100% { opacity: 0.4; }
     50% { opacity: 1; }
   }
 
-  /* ===== Letter Content ===== */
-  .letter-content {
+  /* ===== Letter Screen ===== */
+  .screen-letter {
+    background: var(--letter-bg);
+    flex-direction: column;
     display: none;
-    max-width: 560px;
-    margin: 0 auto;
-    animation: fadeInUp 0.6s ease;
+    padding: 60px 24px;
   }
-
-  .letter-content.visible {
-    display: block;
-  }
-
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .letter-paper {
-    background: var(--color-letter);
-    border-radius: 8px;
-    padding: 40px 32px;
-    box-shadow: var(--shadow-md);
+  .screen-letter.visible { display: flex; }
+  .letter-sheet {
+    background: var(--letter-bg);
+    max-width: 600px;
+    width: 100%;
+    min-height: 60vh;
+    padding: clamp(32px, 6vw, 56px) clamp(24px, 5vw, 48px) clamp(32px, 6vw, 56px) clamp(40px, 7vw, 64px);
     position: relative;
-    min-height: 320px;
-    /* Lined paper effect */
+    box-shadow: 0 8px 40px rgba(0,0,0,0.06);
+    border-radius: 4px;
+    /* lined paper */
     background-image:
       repeating-linear-gradient(
-        transparent,
-        transparent 31px,
-        rgba(212,165,116,0.15) 31px,
-        rgba(212,165,116,0.15) 32px
+        transparent, transparent 31px,
+        rgba(180,160,140,0.12) 31px,
+        rgba(180,160,140,0.12) 32px
       );
-    background-position: 0 60px;
+    background-position: 0 64px;
   }
-
-  .letter-paper::before {
+  .letter-sheet::before {
     content: '';
     position: absolute;
-    left: 40px;
-    top: 0;
-    bottom: 0;
+    left: clamp(48px, 9vw, 72px);
+    top: 0; bottom: 0;
     width: 1px;
-    background: rgba(212,165,116,0.2);
+    background: rgba(200,170,150,0.2);
   }
-
-  .letter-page {
+  .letter-body {
     font-family: 'Ma Shan Zheng', cursive;
-    font-size: 20px;
+    font-size: clamp(18px, 3vw, 22px);
     line-height: 2;
     color: #3D2B1F;
   }
-
-  .letter-page p {
-    margin-bottom: 12px;
+  .letter-body .l-salute {
+    font-size: 0.9em;
+    margin-bottom: 16px;
   }
-
-  .letter-page .salutation {
-    font-size: 18px;
-    margin-bottom: 20px;
-  }
-
-  .letter-page .signature {
+  .letter-body p { margin-bottom: 10px; }
+  .letter-body .l-sign {
     text-align: right;
-    margin-top: 24px;
+    margin-top: 28px;
+    font-size: 0.9em;
+  }
+  .letter-pages {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    margin-top: 28px;
+  }
+  .letter-pages button {
+    width: 44px; height: 44px;
+    border-radius: 50%;
+    border: 1.5px solid #D4C8B8;
+    background: #fff;
+    cursor: pointer;
     font-size: 18px;
+    color: var(--text);
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .letter-pages button:hover:not(:disabled) {
+    border-color: var(--primary);
+    color: var(--primary);
+  }
+  .letter-pages button:disabled { opacity: 0.25; cursor: default; }
+  .letter-pages .lp-indicator {
+    font-size: 14px;
+    color: var(--text-muted);
+    min-width: 40px;
+    text-align: center;
   }
 
-  /* Page nav */
-  .letter-pages-nav {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 16px;
+  /* ===== Quotes + Footer Screen ===== */
+  .screen-quotes {
+    background: var(--bg);
+    flex-direction: column;
+    text-align: center;
+    gap: 32px;
+  }
+  .quotes-heading {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(20px, 3.5vw, 26px);
+    color: var(--text);
+    letter-spacing: 3px;
+  }
+  .quote-big {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(18px, 3vw, 22px);
+    color: var(--primary);
+    max-width: 500px;
+    line-height: 2;
+    padding: 32px 24px;
+    background: var(--white);
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.05);
+    position: relative;
+  }
+  .quote-big::before {
+    content: '"';
+    position: absolute;
+    top: -14px; left: 20px;
+    font-family: 'Noto Serif SC', serif;
+    font-size: 48px;
+    color: var(--accent);
+    opacity: 0.35;
+    line-height: 1;
+  }
+  .footer-note {
+    font-size: 14px;
+    color: var(--text-muted);
+    letter-spacing: 2px;
     margin-top: 20px;
   }
 
-  .letter-page-btn {
-    width: 40px;
-    height: 40px;
+  /* ===== Checklist float button ===== */
+  .float-checklist-btn {
+    position: fixed;
+    bottom: 28px;
+    right: 28px;
+    z-index: 200;
+    width: 52px; height: 52px;
     border-radius: 50%;
-    border: 1.5px solid var(--color-border);
-    background: var(--color-card);
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    font-size: 22px;
     cursor: pointer;
-    font-size: 16px;
-    color: var(--color-text);
+    box-shadow: 0 4px 20px rgba(139,26,43,0.35);
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
   }
-
-  .letter-page-btn:hover {
-    border-color: var(--color-primary);
-    color: var(--color-primary);
+  .float-checklist-btn:hover {
+    transform: scale(1.08);
+    box-shadow: 0 6px 28px rgba(139,26,43,0.45);
   }
-
-  .letter-page-btn:disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
-  }
-
-  .letter-page-indicator {
-    font-size: 13px;
-    color: var(--color-muted);
-  }
-
-  /* ===== Quote Cards ===== */
-  .quotes-wrap {
-    max-width: 560px;
-    margin: 32px auto 0;
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 14px;
-  }
-
-  .quote-card {
-    background: var(--color-card);
-    border-left: 3px solid var(--color-accent);
-    border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-    padding: 16px 20px;
-    box-shadow: var(--shadow-sm);
-    position: relative;
-  }
-
-  .quote-card::before {
-    content: '"';
+  .float-badge {
     position: absolute;
-    top: -6px;
-    left: 12px;
+    top: -4px; right: -4px;
+    width: 20px; height: 20px;
+    border-radius: 50%;
+    background: #fff;
+    color: var(--primary);
+    font-size: 11px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+  }
+
+  /* Checklist Overlay */
+  .checklist-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 300;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+  }
+  .checklist-overlay.open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .checklist-panel {
+    background: var(--white);
+    border-radius: 24px;
+    width: min(440px, 90vw);
+    max-height: 75vh;
+    overflow-y: auto;
+    padding: 32px 24px;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+    transform: translateY(20px);
+    transition: transform 0.35s ease;
+  }
+  .checklist-overlay.open .checklist-panel {
+    transform: translateY(0);
+  }
+  .checklist-panel h3 {
     font-family: 'Noto Serif SC', serif;
-    font-size: 32px;
-    color: var(--color-accent);
-    opacity: 0.4;
-    line-height: 1;
-  }
-
-  .quote-card .quote-text {
-    font-family: 'Noto Serif SC', serif;
-    font-size: 15px;
-    color: var(--color-text);
-    line-height: 1.8;
-    padding-left: 8px;
-    padding-top: 8px;
-  }
-
-  @media (min-width: 768px) {
-    .quotes-wrap {
-      grid-template-columns: 1fr 1fr 1fr;
-    }
-  }
-
-  /* ===== Footer ===== */
-  .footer {
-    text-align: center;
-    padding: 60px 24px 40px;
-    color: var(--color-muted);
-    font-size: 14px;
-  }
-
-  .footer-heart {
     font-size: 20px;
+    text-align: center;
     margin-bottom: 8px;
+    color: var(--primary);
+  }
+  .cl-progress-bar {
+    height: 4px;
+    background: #E8D5C4;
+    border-radius: 2px;
+    margin: 16px 0;
+    overflow: hidden;
+  }
+  .cl-progress-fill {
+    height: 100%;
+    background: var(--primary);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+  }
+  .cl-progress-text {
+    text-align: center;
+    font-size: 13px;
+    color: var(--text-muted);
+    margin-bottom: 16px;
+  }
+  .checklist-panel .cl-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+  .checklist-panel .cl-list li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 15px;
+  }
+  .checklist-panel .cl-list li:active { background: #F5F0EB; }
+  .checklist-panel .cl-list .cl-dot {
+    width: 24px; height: 24px;
+    border-radius: 50%;
+    border: 2px solid #D4C8B8;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s;
+    font-size: 12px;
+    color: transparent;
+  }
+  .checklist-panel .cl-list li.done .cl-dot {
+    background: #5B8C5A;
+    border-color: #5B8C5A;
+    color: #fff;
+  }
+  .checklist-panel .cl-list li.done .cl-label {
+    text-decoration: line-through;
+    color: #AAA;
+  }
+  .cl-close {
+    display: block;
+    margin: 24px auto 0;
+    padding: 10px 32px;
+    border-radius: 24px;
+    border: 1.5px solid #D4C8B8;
+    background: #fff;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .cl-close:hover { border-color: var(--primary); color: var(--primary); }
+
+  /* ===== Utilities ===== */
+  .hidden { display: none !important; }
+
+  /* ===== Swipe hint for mobile ===== */
+  .swipe-hint {
+    position: absolute;
+    bottom: 24px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    animation: swipeHint 2s ease-in-out infinite;
+    pointer-events: none;
+  }
+  .swipe-hint svg { width: 18px; height: 18px; }
+  @keyframes swipeHint {
+    0%, 100% { opacity: 0.3; transform: translateX(-50%) translateX(-4px); }
+    50% { opacity: 0.7; transform: translateX(-50%) translateX(4px); }
   }
 
-  /* ===== Desktop adjustments ===== */
   @media (min-width: 768px) {
-    .section {
-      padding: 0 32px;
-    }
-
-    .flow-card {
-      padding: 48px 40px;
-      min-height: 200px;
-    }
-
-    .flow-card .step-title {
-      font-size: 22px;
-    }
-
-    .carousel-arrow {
-      width: 48px;
-      height: 48px;
-    }
-
-    .letter-paper {
-      padding: 48px 48px 48px 56px;
-    }
-
-    .letter-paper::before {
-      left: 48px;
-    }
-  }
-
-  /* ===== Hidden states ===== */
-  .hidden {
-    display: none !important;
-  }
-
-  /* ===== Check pulse animation ===== */
-  @keyframes checkPop {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.2); }
-    100% { transform: scale(1); }
-  }
-
-  .check-pop {
-    animation: checkPop 0.3s ease;
+    .screen { padding: 60px 40px; }
   }
 </style>
 </head>
 <body>
 
-<!-- ===== Hero ===== -->
-<header class="hero">
-  <p class="hero-date">2026 · 08 · 02</p>
-  <h1 class="hero-title">艾毓灵 &amp; 瑶瑶</h1>
-  <p class="hero-sub">订婚之礼</p>
-  <span class="hero-decor"></span>
-  <div class="scroll-hint">
-    <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M12 5v14M5 12l7 7 7-7"/>
-    </svg>
+<!-- ===== Progress Sidebar ===== -->
+<nav class="progress-side" id="progressSide" aria-label="页面导航"></nav>
+
+<!-- ===== Float Checklist Button ===== -->
+<button class="float-checklist-btn" id="floatCheckBtn" aria-label="查看清单">
+  📋
+  <span class="float-badge hidden" id="floatBadge">0</span>
+</button>
+
+<!-- ===== Checklist Overlay ===== -->
+<div class="checklist-overlay" id="checklistOverlay">
+  <div class="checklist-panel">
+    <h3>📋 订婚流程清单</h3>
+    <div class="cl-progress-bar"><div class="cl-progress-fill" id="clProgressFill" style="width:0%"></div></div>
+    <p class="cl-progress-text" id="clProgressText">已完成 0/12</p>
+    <ul class="cl-list" id="clList"></ul>
+    <button class="cl-close" id="clClose">关闭</button>
   </div>
-</header>
+</div>
 
-<!-- ===== Main Content ===== -->
-<main class="section">
-
-  <!-- ===== Mode Tabs ===== -->
-  <div class="mode-tabs">
-    <button class="mode-tab active" data-mode="card">📸 卡片浏览</button>
-    <button class="mode-tab" data-mode="list">✅ 互动清单</button>
+<!-- ============================================= -->
+<!-- ===== SCREEN 1: HERO ===== -->
+<!-- ============================================= -->
+<section class="screen screen-hero" id="screen-hero" data-screen="0">
+  <div class="hero-ring"></div>
+  <p class="hero-top-line">贰零贰陆 · 捌月贰日</p>
+  <h1 class="hero-names">
+    艾毓灵<span class="hero-amp">&amp;</span>瑶瑶
+  </h1>
+  <p class="hero-subtitle">订 婚 之 礼</p>
+  <div class="hero-decor"></div>
+  <div class="scroll-down">
+    <span>向 下 浏 览</span>
+    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
   </div>
+</section>
 
-  <!-- ===== Card Carousel ===== -->
-  <div class="carousel-wrap active" id="carouselWrap">
-    <button class="carousel-arrow" id="prevBtn" aria-label="上一张">◂</button>
-    <div class="carousel-container" id="carouselContainer">
-      <div class="carousel-track" id="carouselTrack">
-        <!-- Cards injected by JS -->
-      </div>
+<!-- ============================================= -->
+<!-- ===== SCREEN 2-13: EACH STEP ===== -->
+<!-- ============================================= -->
+<section class="screen screen-step" data-screen="1">
+  <div class="bg-num">01</div>
+  <span class="step-badge">第 一 步</span>
+  <div class="step-icon-wrap"><span class="s-icon">🎁</span></div>
+  <h2 class="step-title">男方提聘礼上门</h2>
+  <p class="step-desc">毓灵带着精心准备的聘礼登门——烟酒糖茶、糕饼点心、金银首饰，件件都是心意。这是两家正式结亲的第一步，也是最郑重的一刻。瑶瑶家里早已张灯结彩，等着迎接这位"准女婿"的到来。</p>
+  <button class="step-check" data-step="0" aria-label="标记完成"></button>
+</section>
+
+<section class="screen screen-step" data-screen="2">
+  <div class="bg-num">02</div>
+  <span class="step-badge">第 二 步</span>
+  <div class="step-icon-wrap"><span class="s-icon">🍽️</span></div>
+  <h2 class="step-title">女方备宴迎客</h2>
+  <p class="step-desc">瑶瑶家备好一桌丰盛家宴，热气腾腾地摆上桌。菜是家常的，但道道都藏着女主人的心意——红烧肉寓意红红火火，整鱼象征年年有余，还有瑶瑶最爱的那道菜，妈妈特意多做了些。迎客上座，一家人齐齐整整。</p>
+  <button class="step-check" data-step="1" aria-label="标记完成"></button>
+</section>
+
+<section class="screen screen-step" data-screen="3">
+  <div class="bg-num">03</div>
+  <span class="step-badge">第 三 步</span>
+  <div class="step-icon-wrap"><span class="s-icon">🍵</span></div>
+  <h2 class="step-title">茶叙寒暄，两家交心</h2>
+  <p class="step-desc">热茶沏上，两家人围坐一圈。从今天的天气聊到儿女小时候的趣事，从工作近况聊到未来的打算。话匣子一打开，拘谨就慢慢散了。这一杯茶里，品的不是茶叶好坏，而是两家人能不能聊到一起、过到一起。</p>
+  <button class="step-check" data-step="2" aria-label="标记完成"></button>
+</section>
+
+<section class="screen screen-step" data-screen="4">
+  <div class="bg-num">04</div>
+  <span class="step-badge">第 四 步</span>
+  <div class="step-icon-wrap"><span class="s-icon">🧧</span></div>
+  <h2 class="step-title">提彩礼，递红包</h2>
+  <p class="step-desc">茶过三巡，媒人（或男方长辈）开口提彩礼。数额是两家人事先商量好的，但仪式感不能少。红纸包好的彩礼郑重递到瑶瑶爸妈手中——这不是"买人"，是男方家庭对女方二十多年养育之恩的感谢和尊重。瑶瑶妈妈接过红包的那一刻，眼眶或许会红。</p>
+  <button class="step-check" data-step="3" aria-label="标记完成"></button>
+</section>
+
+<section class="screen screen-step" data-screen="5">
+  <div class="bg-num">05</div>
+  <span class="step-badge">第 五 步</span>
+  <div class="step-icon-wrap"><span class="s-icon">💝</span></div>
+  <h2 class="step-title">给弟弟妹妹见面礼</h2>
+  <p class="step-desc">毓灵拿出准备好的见面礼，一一递给瑶瑶的弟弟妹妹。红包不分大小，但这份心意是沉甸甸的——从今往后，你的弟弟妹妹就是我的弟弟妹妹。弟弟接过红包腼腆地叫声"姐夫"，妹妹笑嘻嘻地说了句"谢谢哥哥"，气氛一下子就暖了。</p>
+  <button class="step-check" data-step="4" aria-label="标记完成"></button>
+</section>
+
+<section class="screen screen-step" data-screen="6">
+  <div class="bg-num">06</div>
+  <span class="step-badge">第 六 步</span>
+  <div class="step-icon-wrap"><span class="s-icon">📷</span></div>
+  <h2 class="step-title">定格这一刻</h2>
+  <p class="step-desc">再好的记忆也抵不过一张照片。所有人聚到客厅中央——毓灵和瑶瑶站在最中间，两边是双方父母、弟弟妹妹。摄影师喊"一二三"，快门按下去的那一刻，每个人都笑得很真心。几十年后再翻出这张照片，你看到的就不只是订婚礼，而是一整个家的起点。</p>
+  <button class="step-check" data-step="5" aria-label="标记完成"></button>
+</section>
+
+<section class="screen screen-step" data-screen="7">
+  <div class="bg-num">07</div>
+  <span class="step-badge">第 七 步</span>
+  <div class="step-icon-wrap"><span class="s-icon">🥢</span></div>
+  <h2 class="step-title">共进午餐</h2>
+  <p class="step-desc">酒店送来的菜一道道摆上圆桌——白切鸡、红烧鱼、酿豆腐、梅菜扣肉……江西老家的味道。大人们推杯换盏，弟弟妹妹埋头扒饭，毓灵站起来给瑶瑶爸妈敬酒，叫的那声"叔叔阿姨"里已经藏了半分"爸妈"的味道。一张圆桌，把两家人圈成了一个圆。</p>
+  <button class="step-check" data-step="6" aria-label="标记完成"></button>
+</section>
+
+<section class="screen screen-step" data-screen="8">
+  <div class="bg-num">08</div>
+  <span class="step-badge">第 八 步</span>
+  <div class="step-icon-wrap"><span class="s-icon">☕</span></div>
+  <h2 class="step-title">饭后茶叙，闲话家常</h2>
+  <p class="step-desc">饭吃饱了，重新泡上一壶热茶。这时候聊的就不只是客气话了——瑶瑶爸爸聊起了毓灵的学业和未来的职业规划，瑶瑶妈妈关心起两个人在宁波的生活安排。话题从今天聊到明天，从明天聊到以后。毓灵坐得板板正正，认真地听着、应着，因为他知道，这是长辈在交心了。</p>
+  <button class="step-check" data-step="7" aria-label="标记完成"></button>
+</section>
+
+<section class="screen screen-step" data-screen="9">
+  <div class="bg-num">09</div>
+  <span class="step-badge">第 九 步</span>
+  <div class="step-icon-wrap"><span class="s-icon">🧧</span></div>
+  <h2 class="step-title">打发红包，临别馈赠</h2>
+  <p class="step-desc">要走了，瑶瑶爸妈拿出准备好的打发红包塞给毓灵——这是女方家的心意，意思是"我们认了你这门亲"。红包不在大，在那一句"以后要对瑶瑶好"。毓灵双手接过，郑重地说"叔叔阿姨放心"。一只红包，交的是信任，接的是责任。</p>
+  <button class="step-check" data-step="8" aria-label="标记完成"></button>
+</section>
+
+<section class="screen screen-step" data-screen="10">
+  <div class="bg-num">10</div>
+  <span class="step-badge">第 十 步</span>
+  <div class="step-icon-wrap"><span class="s-icon">🚗</span></div>
+  <h2 class="step-title">一点半，启程回永丰</h2>
+  <p class="step-desc">时辰到了，毓灵和家人收拾行装准备出发回永丰。临走前，瑶瑶送他到门口，两个人相视一笑——今天这场礼成了，从此两颗心就算定下来了。车子发动，摇下车窗挥手告别，瑶瑶的妈妈站在门口一直目送到路口拐弯看不到。</p>
+  <button class="step-check" data-step="9" aria-label="标记完成"></button>
+</section>
+
+<section class="screen screen-step" data-screen="11">
+  <div class="bg-num">11</div>
+  <span class="step-badge">第十一步</span>
+  <div class="step-icon-wrap"><span class="s-icon">📦</span></div>
+  <h2 class="step-title">布置收拾，有来有回</h2>
+  <p class="step-desc">订婚礼成，把带来的聘礼清点交接，女方回赠的礼物也要细心打包。瑶瑶和妈妈一起把准备给男方带回去的东西——自家做的腊肉、瑶瑶妈妈亲手腌的咸菜、几盒贵溪特产——一样样装好。这些物件不值多少钱，但每一样都是女方的脸面和心意。收拾完毕，屋子空了，但两家的关系满了。</p>
+  <button class="step-check" data-step="10" aria-label="标记完成"></button>
+</section>
+
+<section class="screen screen-step" data-screen="12">
+  <div class="bg-num">12</div>
+  <span class="step-badge">第十二步</span>
+  <div class="step-icon-wrap"><span class="s-icon">🏠</span></div>
+  <h2 class="step-title">毓灵到家，礼成圆满</h2>
+  <p class="step-desc">车子开进永丰，毓灵踏进家门的那一刻——今天这场订婚，从清晨备礼到午后归来，每一个环节都踏踏实实地走完了。从今天起，艾家和瑶瑶家就不再是两家人了。毓灵坐在自家沙发上，给瑶瑶发了一条消息："到家了。今天辛苦你了。"瑶瑶回了一个笑脸。路还长，但第一步，走得稳稳当当。</p>
+  <button class="step-check" data-step="11" aria-label="标记完成"></button>
+</section>
+
+<!-- ============================================= -->
+<!-- ===== SCREEN 14: ENVELOPE ===== -->
+<!-- ============================================= -->
+<section class="screen screen-envelope" data-screen="13" id="screenEnvelope">
+  <h2 class="envelope-heading">给瑶瑶爸爸妈妈的一封信</h2>
+  <div class="envelope-big" id="envelopeBig">
+    <div class="env-body">
+      <div class="env-flap"></div>
+      <div class="env-seal">缄</div>
+      <p class="env-to">瑶瑶爸爸妈妈&ensp;亲启</p>
+      <p class="env-tap">👆 点击打开</p>
     </div>
-    <button class="carousel-arrow" id="nextBtn" aria-label="下一张">▸</button>
   </div>
+  <p class="step-nav-hint">↓ 继续下滑</p>
+</section>
 
-  <!-- Dots -->
-  <div class="carousel-dots active" id="carouselDots"></div>
-
-  <!-- ===== Checklist ===== -->
-  <div class="checklist-wrap" id="checklistWrap">
-    <div class="checklist-progress">
-      <div class="progress-bar">
-        <div class="progress-fill" id="progressFill" style="width:0%"></div>
-      </div>
-      <p class="progress-text" id="progressText">已完成 0/12</p>
+<!-- ============================================= -->
+<!-- ===== SCREEN 15: LETTER ===== -->
+<!-- ============================================= -->
+<section class="screen screen-letter" data-screen="14" id="screenLetter">
+  <div class="letter-sheet">
+    <div class="letter-body" data-page="0" id="letterPage0">
+      <p class="l-salute">你好叔叔，阿姨！</p>
+      <p>我是小艾，感觉是一下子闯入你们家人的一个人。在今日要和瑶瑶正式订婚。非常感谢你们的付出，让一位非常好的人可以成为我的未来的妻子。你们肯定也吃了很多苦，一下子将家里的三位小孩都抚养成人，并且成才。你们真的辛苦了，非常感谢你们！</p>
+      <p>我相信瑶瑶是一位很好的人，很值得托付后背的人，也是对我很好的人。瑶瑶在我心里的分量真的很重很重，是不知不觉地就占据了心里的高地的那种。所以我也不希望瑶瑶再哭泣，反而可以在我这里发发歪歪。</p>
     </div>
-    <ul class="checklist" id="checklist">
-      <!-- Injected by JS -->
-    </ul>
+    <div class="letter-body hidden" data-page="1" id="letterPage1">
+      <p>瑶瑶真的很爱你们，爱瑶瑶的爸爸妈妈，爱瑶瑶的妹妹，爱瑶瑶的弟弟。都是自己的至亲哪有不爱的呢？都是瑶瑶爱的人，那就要多多放在心里爱她。因为瑶瑶不仅是你们的女儿，也是姐姐，同时也是我的未来共度余生的妻子。你看瑶瑶多幸福，那么多人爱她。请真的多多爱她，我一个人爱瑶瑶可是会抢过你们对她的爱哦！哈哈哈哈哈哈。</p>
+      <p>瑶瑶无论在哪里，都会希望有家人在身边。瑶瑶真的很好很好！</p>
+    </div>
+    <div class="letter-body hidden" data-page="2" id="letterPage2">
+      <p>我家里有位哲人说过一句话："大家都好好过，不是一个人的小家过好，是我们的家都过好，每一个人的小家过好，我们的整个大家就会更好。"叔叔阿姨也和和睦睦的，我和瑶瑶也恩恩爱爱的，妹妹和弟弟也互相帮助互相关心。我们整个家都会很好的。都会有的，什么都会有的。</p>
+      <p>我会对瑶瑶好好的，我会和瑶瑶认认真真地过日子的。我们都踏踏实实的，脚踏实地的。只是叔叔阿姨给我和瑶瑶一些时间，如今我也要准备入学了，瑶瑶也刚刚正式开始工作。我们一切都刚刚开始。所以我估计又要出国读书，因此我想在订婚后，在出国前先和瑶瑶正式地把结婚证领了。望叔叔阿姨的批准。也算正式给瑶瑶一个交代。我很早就和瑶瑶说了，我在国外读书就像是一个风筝，风筝线永远都在国内，抓住风筝线的那个手永远都是瑶瑶的手。</p>
+      <p>非常感谢你们对瑶瑶的爱，所以不要吝啬，请再多多爱我们。</p>
+      <p>再次郑重地和叔叔阿姨说一声谢谢。</p>
+      <p class="l-sign">2026年8月2日&ensp;贵溪<br>艾毓灵</p>
+    </div>
   </div>
+  <div class="letter-pages">
+    <button id="lPrev" disabled>◂</button>
+    <span class="lp-indicator" id="lIndicator">1 / 3</span>
+    <button id="lNext">▸</button>
+  </div>
+</section>
 
-  <!-- ===== Letter Section ===== -->
-  <section class="letter-section">
-    <h2 class="letter-heading">给瑶瑶爸爸妈妈的一封信</h2>
+<!-- ============================================= -->
+<!-- ===== SCREEN 16: QUOTES + FOOTER ===== -->
+<!-- ============================================= -->
+<section class="screen screen-quotes" data-screen="15">
+  <div class="quote-big">
+    风筝线永远都在国内，<br>抓住风筝线的那个手<br>永远都是瑶瑶的手。
+  </div>
+  <div class="quote-big">
+    瑶瑶在我心里的分量<br>真的很重很重。
+  </div>
+  <div class="quote-big">
+    请再多多爱我们。
+  </div>
+  <div class="hero-decor"></div>
+  <p class="footer-note">💝</p>
+  <p class="footer-note">艾毓灵 &amp; 瑶瑶 · 订婚之礼</p>
+  <p class="footer-note">2026年8月2日 · 贵溪</p>
+</section>
 
-    <!-- Envelope -->
-    <div class="envelope-wrap" id="envelopeWrap">
-      <div class="envelope" id="envelope">
-        <div class="envelope-body">
-          <div class="envelope-flap"></div>
-          <div class="seal">缄</div>
-          <p class="envelope-label">瑶瑶爸爸妈妈&ensp;亲启</p>
-          <p class="envelope-hint">点击打开</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Letter Pages -->
-    <div class="letter-content" id="letterContent">
-      <div class="letter-paper">
-        <!-- Page 1: salutation + para 1-2 -->
-        <div class="letter-page" data-page="0">
-          <p class="salutation">你好叔叔，阿姨！</p>
-          <p>我是小艾，感觉是一下子闯入你们家人的一个人。在今日要和瑶瑶正式订婚。非常感谢你们的付出，让一位非常好的人可以成为我的未来的妻子。你们肯定也吃了很多苦，一下子将家里的三位小孩都抚养成人，并且成才。你们真的辛苦了，非常感谢你们！</p>
-          <p>我相信瑶瑶是一位很好的人，很值得托付后背的人，也是对我很好的人。瑶瑶在我心里的分量真的很重很重，是不知不觉地就占据了心里的高地的那种。所以我也不希望瑶瑶再哭泣，反而可以在我这里发发歪歪。</p>
-        </div>
-        <!-- Page 2: para 3-4 -->
-        <div class="letter-page hidden" data-page="1">
-          <p>瑶瑶真的很爱你们，爱瑶瑶的爸爸妈妈，爱瑶瑶的妹妹，爱瑶瑶的弟弟。都是自己的至亲哪有不爱的呢？都是瑶瑶爱的人，那就要多多放在心里爱她。因为瑶瑶不仅是你们的女儿，也是姐姐，同时也是我的未来共度余生的妻子。你看瑶瑶多幸福，那么多人爱她。请真的多多爱她，我一个人爱瑶瑶可是会抢过你们对她的爱哦！哈哈哈哈哈哈。</p>
-          <p>瑶瑶无论在哪里，都会希望有家人在身边。瑶瑶真的很好很好！</p>
-        </div>
-        <!-- Page 3: para 5-6 + signature -->
-        <div class="letter-page hidden" data-page="2">
-          <p>我家里有位哲人说过一句话："大家都好好过，不是一个人的小家过好，是我们的家都过好，每一个人的小家过好，我们的整个大家就会更好。"叔叔阿姨也和和睦睦的，我和瑶瑶也恩恩爱爱的，妹妹和弟弟也互相帮助互相关心。我们整个家都会很好的。都会有的，什么都会有的。</p>
-          <p>我会对瑶瑶好好的，我会和瑶瑶认认真真地过日子的。我们都踏踏实实的，脚踏实地的。只是叔叔阿姨给我和瑶瑶一些时间，如今我也要准备入学了，瑶瑶也刚刚正式开始工作。我们一切都刚刚开始。所以我估计又要出国读书，因此我想在订婚后，在出国前先和瑶瑶正式地把结婚证领了。望叔叔阿姨的批准。也算正式给瑶瑶一个交代。我很早就和瑶瑶说了，我在国外读书就像是一个风筝，风筝线永远都在国内，抓住风筝线的那个手永远都是瑶瑶的手。</p>
-          <p>非常感谢你们对瑶瑶的爱，所以不要吝啬，请再多多爱我们。</p>
-          <p>再次郑重地和叔叔阿姨说一声谢谢。</p>
-          <p class="signature">2026年8月2日&ensp;贵溪<br>艾毓灵</p>
-        </div>
-      </div>
-
-      <!-- Page Nav -->
-      <div class="letter-pages-nav">
-        <button class="letter-page-btn" id="letterPrev" disabled>◂</button>
-        <span class="letter-page-indicator" id="letterPageIndicator">1 / 3</span>
-        <button class="letter-page-btn" id="letterNext">▸</button>
-      </div>
-    </div>
-
-    <!-- Quote Cards -->
-    <div class="quotes-wrap">
-      <div class="quote-card">
-        <p class="quote-text">瑶瑶在我心里的分量真的很重很重</p>
-      </div>
-      <div class="quote-card">
-        <p class="quote-text">风筝线永远都在国内，抓住风筝线的那个手永远都是瑶瑶的手</p>
-      </div>
-      <div class="quote-card">
-        <p class="quote-text">请再多多爱我们</p>
-      </div>
-    </div>
-  </section>
-
-</main>
-
-<!-- ===== Footer ===== -->
-<footer class="footer">
-  <p class="footer-heart">💝</p>
-  <p>艾毓灵 &amp; 瑶瑶 · 订婚之礼 · 2026年8月2日 · 贵溪</p>
-</footer>
-
-<!-- ===== JavaScript ===== -->
 <script>
 (function() {
-  // ===== Data =====
-  const steps = [
-    { icon: '🎁', title: '男方提聘礼上门', note: '带着聘礼，正式登门' },
-    { icon: '🍽️', title: '女方准备一桌饭', note: '家里备好饭菜，迎客入席' },
-    { icon: '🍵', title: '大家喝茶坐', note: '坐下喝茶，聊聊天' },
-    { icon: '🧧', title: '开始提彩礼，给红包', note: '彩礼红包，诚意满满' },
-    { icon: '💝', title: '给弟弟妹妹见面礼', note: '一家人就是要整整齐齐' },
-    { icon: '📷', title: '拍照', note: '记录下这个重要的日子' },
-    { icon: '🥢', title: '吃饭（酒店送）', note: '共进午餐，其乐融融' },
-    { icon: '☕', title: '吃完饭喝点茶中坐聊聊天', note: '饭后茶叙，闲话家常' },
-    { icon: '💰', title: '出发前的打发红包', note: '临别红包，礼节周全' },
-    { icon: '🚗', title: '1点半左右出发回永丰', note: '收拾行装，启程回家' },
-    { icon: '📦', title: '布置东西收拾带走', note: '整理好所有物品' },
-    { icon: '🏠', title: '毓灵在家', note: '回到家中，圆满礼成' }
-  ];
+  const TOTAL_STEPS = 12;
+  const STORAGE_KEY = 'engagement_checks';
 
   // ===== State =====
-  const STORAGE_KEY = 'engagement_checklist';
-  let checkedState = new Array(steps.length).fill(false);
-  let currentCard = 0;
+  let checked = new Array(TOTAL_STEPS).fill(false);
   let currentLetterPage = 0;
   let envelopeOpened = false;
-  let touchStartX = 0;
-  let touchStartY = 0;
 
-  // Load saved state
   try {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      if (Array.isArray(parsed) && parsed.length === steps.length) {
-        checkedState = parsed;
-      }
+    const s = localStorage.getItem(STORAGE_KEY);
+    if (s) { const p = JSON.parse(s); if (Array.isArray(p) && p.length === TOTAL_STEPS) checked = p; }
+  } catch(e) {}
+
+  function save() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(checked)); } catch(e) {} }
+
+  function countDone() { return checked.filter(Boolean).length; }
+
+  // ===== DOM =====
+  const progressSide = document.getElementById('progressSide');
+  const floatBadge = document.getElementById('floatBadge');
+  const checklistOverlay = document.getElementById('checklistOverlay');
+  const clList = document.getElementById('clList');
+  const clProgressFill = document.getElementById('clProgressFill');
+  const clProgressText = document.getElementById('clProgressText');
+  const clClose = document.getElementById('clClose');
+  const floatCheckBtn = document.getElementById('floatCheckBtn');
+  const envelopeBig = document.getElementById('envelopeBig');
+  const screenEnvelope = document.getElementById('screenEnvelope');
+  const screenLetter = document.getElementById('screenLetter');
+  const lPrev = document.getElementById('lPrev');
+  const lNext = document.getElementById('lNext');
+  const lIndicator = document.getElementById('lIndicator');
+
+  // ===== Build Progress Sidebar =====
+  function buildProgressDots() {
+    const screens = document.querySelectorAll('.screen[data-screen]');
+    const total = screens.length;
+    let html = '';
+    for (let i = 0; i < total; i++) {
+      html += `<span class="p-dot" data-index="${i}" title="第${i+1}屏"></span>`;
     }
-  } catch(e) { /* ignore */ }
-
-  function saveState() {
-    try {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(checkedState));
-    } catch(e) { /* ignore */ }
+    progressSide.innerHTML = html;
   }
 
-  // ===== DOM Refs =====
-  const carouselTrack = document.getElementById('carouselTrack');
-  const carouselDots = document.getElementById('carouselDots');
-  const carouselWrap = document.getElementById('carouselWrap');
-  const checklistWrap = document.getElementById('checklistWrap');
-  const checklistEl = document.getElementById('checklist');
-  const progressFill = document.getElementById('progressFill');
-  const progressText = document.getElementById('progressText');
-  const envelope = document.getElementById('envelope');
-  const envelopeWrap = document.getElementById('envelopeWrap');
-  const letterContent = document.getElementById('letterContent');
-  const letterPrev = document.getElementById('letterPrev');
-  const letterNext = document.getElementById('letterNext');
-  const letterPageIndicator = document.getElementById('letterPageIndicator');
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
-  const carouselContainer = document.getElementById('carouselContainer');
+  // ===== Build Checklist Overlay =====
+  const stepLabels = [
+    '男方提聘礼上门', '女方准备一桌饭', '大家喝茶坐',
+    '开始提彩礼，给红包', '给弟弟妹妹见面礼', '拍照',
+    '吃饭（酒店送）', '吃完饭喝点茶中坐聊聊天', '出发前的打发红包',
+    '1点半左右出发回永丰', '布置东西收拾带走', '毓灵在家'
+  ];
 
-  // ===== Build Cards =====
-  function buildCards() {
-    carouselTrack.innerHTML = steps.map((s, i) => `
-      <div class="flow-card">
-        <button class="check-btn${checkedState[i] ? ' checked' : ''}" data-index="${i}" aria-label="标记完成">
-          ${checkedState[i] ? '✓' : ''}
-        </button>
-        <span class="step-num">第 ${i + 1} 步</span>
-        <span class="step-icon">${s.icon}</span>
-        <h3 class="step-title">${s.title}</h3>
-        <p class="step-note">${s.note}</p>
-      </div>
-    `).join('');
-
-    // Dots
-    carouselDots.innerHTML = steps.map((_, i) => `
-      <span class="dot${i === 0 ? ' active' : ''}" data-index="${i}"></span>
-    `).join('');
-  }
-
-  // ===== Build Checklist =====
   function buildChecklist() {
-    checklistEl.innerHTML = steps.map((s, i) => `
-      <li data-index="${i}" class="${checkedState[i] ? 'checked' : ''}">
-        <span class="cl-num">${String(i + 1).padStart(2, '0')}</span>
-        <span class="cl-icon">${s.icon}</span>
-        <span class="cl-text">${s.title}</span>
-        <span class="cl-check"></span>
+    clList.innerHTML = stepLabels.map((label, i) => `
+      <li data-step="${i}" class="${checked[i] ? 'done' : ''}">
+        <span class="cl-dot">${checked[i] ? '✓' : ''}</span>
+        <span class="cl-label">${label}</span>
       </li>
     `).join('');
-    updateProgress();
+    updateChecklistProgress();
   }
 
-  function updateProgress() {
-    const done = checkedState.filter(Boolean).length;
-    const pct = (done / steps.length) * 100;
-    progressFill.style.width = pct + '%';
-    progressText.textContent = `已完成 ${done}/${steps.length}`;
-  }
-
-  // ===== Card Navigation =====
-  function goToCard(index) {
-    if (index < 0 || index >= steps.length) return;
-    currentCard = index;
-    carouselTrack.style.transform = `translateX(-${index * 100}%)`;
-
-    // Update dots
-    carouselDots.querySelectorAll('.dot').forEach((d, i) => {
-      d.classList.toggle('active', i === index);
-    });
-  }
-
-  // Arrow buttons
-  prevBtn.addEventListener('click', () => goToCard(currentCard - 1));
-  nextBtn.addEventListener('click', () => goToCard(currentCard + 1));
-
-  // Dots click
-  carouselDots.addEventListener('click', (e) => {
-    const dot = e.target.closest('.dot');
-    if (!dot) return;
-    goToCard(parseInt(dot.dataset.index));
-  });
-
-  // Keyboard
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft') goToCard(currentCard - 1);
-    if (e.key === 'ArrowRight') goToCard(currentCard + 1);
-  });
-
-  // Touch swipe for carousel
-  carouselContainer.addEventListener('touchstart', (e) => {
-    touchStartX = e.touches[0].clientX;
-    touchStartY = e.touches[0].clientY;
-  }, { passive: true });
-
-  carouselContainer.addEventListener('touchend', (e) => {
-    const dx = e.changedTouches[0].clientX - touchStartX;
-    const dy = e.changedTouches[0].clientY - touchStartY;
-    // Only if horizontal swipe dominates
-    if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
-      if (dx < 0) goToCard(currentCard + 1);
-      else goToCard(currentCard - 1);
+  function updateChecklistProgress() {
+    const done = countDone();
+    const pct = (done / TOTAL_STEPS) * 100;
+    clProgressFill.style.width = pct + '%';
+    clProgressText.textContent = `已完成 ${done}/${TOTAL_STEPS}`;
+    if (done > 0) {
+      floatBadge.classList.remove('hidden');
+      floatBadge.textContent = done;
+    } else {
+      floatBadge.classList.add('hidden');
     }
-  });
+  }
 
-  // ===== Check Toggle =====
-  function toggleCheck(index) {
-    checkedState[index] = !checkedState[index];
-    saveState();
+  // ===== Toggle step =====
+  function toggleStep(index) {
+    checked[index] = !checked[index];
+    save();
     syncAllUI();
   }
 
   function syncAllUI() {
-    // Cards
-    carouselTrack.querySelectorAll('.flow-card').forEach((card, i) => {
-      const btn = card.querySelector('.check-btn');
-      if (checkedState[i]) {
-        btn.classList.add('checked');
+    // Step screen check buttons
+    document.querySelectorAll('.step-check').forEach(btn => {
+      const idx = parseInt(btn.dataset.step);
+      if (checked[idx]) {
+        btn.classList.add('done');
         btn.textContent = '✓';
       } else {
-        btn.classList.remove('checked');
+        btn.classList.remove('done');
         btn.textContent = '';
       }
     });
-
-    // Checklist
-    checklistEl.querySelectorAll('li').forEach((li, i) => {
-      li.classList.toggle('checked', checkedState[i]);
+    // Checklist overlay
+    clList.querySelectorAll('li').forEach((li, i) => {
+      li.classList.toggle('done', checked[i]);
+      li.querySelector('.cl-dot').textContent = checked[i] ? '✓' : '';
     });
-
-    updateProgress();
+    // Progress sidebar dots
+    updateSidebarDots();
+    updateChecklistProgress();
   }
 
-  // Card check button clicks
-  carouselTrack.addEventListener('click', (e) => {
-    const btn = e.target.closest('.check-btn');
-    if (!btn) return;
-    btn.classList.add('check-pop');
-    setTimeout(() => btn.classList.remove('check-pop'), 300);
-    toggleCheck(parseInt(btn.dataset.index));
-  });
-
-  // Checklist item clicks
-  checklistEl.addEventListener('click', (e) => {
-    const li = e.target.closest('li');
-    if (!li) return;
-    toggleCheck(parseInt(li.dataset.index));
-  });
-
-  // ===== Mode Switching =====
-  const modeTabs = document.querySelectorAll('.mode-tab');
-  modeTabs.forEach(tab => {
-    tab.addEventListener('click', () => {
-      const mode = tab.dataset.mode;
-      modeTabs.forEach(t => t.classList.remove('active'));
-      tab.classList.add('active');
-
-      if (mode === 'card') {
-        carouselWrap.classList.add('active');
-        carouselWrap.style.display = 'flex';
-        carouselDots.classList.add('active');
-        carouselDots.style.display = 'flex';
-        checklistWrap.classList.remove('active');
-        checklistWrap.style.display = 'none';
+  // ===== Sidebar dots active state =====
+  function updateSidebarDots() {
+    const screens = document.querySelectorAll('.screen[data-screen]');
+    const dots = progressSide.querySelectorAll('.p-dot');
+    // Find which screen is most visible
+    let bestIdx = 0, bestRatio = 0;
+    screens.forEach((sc, i) => {
+      const rect = sc.getBoundingClientRect();
+      const visibleH = Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
+      const ratio = visibleH > 0 ? visibleH / rect.height : 0;
+      if (ratio > bestRatio) { bestRatio = ratio; bestIdx = i; }
+    });
+    dots.forEach((d, i) => {
+      d.classList.toggle('active', i === bestIdx);
+      // Mark step screens as done if that step is checked
+      // screen 1-12 map to step 0-11
+      const screenNum = parseInt(screens[i].dataset.screen);
+      if (screenNum >= 1 && screenNum <= 12 && checked[screenNum - 1]) {
+        d.classList.add('done');
       } else {
-        carouselWrap.classList.remove('active');
-        carouselWrap.style.display = 'none';
-        carouselDots.classList.remove('active');
-        carouselDots.style.display = 'none';
-        checklistWrap.classList.add('active');
-        checklistWrap.style.display = 'block';
+        d.classList.remove('done');
       }
     });
+  }
+
+  // Dot click → scroll to screen
+  progressSide.addEventListener('click', (e) => {
+    const dot = e.target.closest('.p-dot');
+    if (!dot) return;
+    const idx = parseInt(dot.dataset.index);
+    const screens = document.querySelectorAll('.screen[data-screen]');
+    if (screens[idx]) {
+      screens[idx].scrollIntoView({ behavior: 'smooth' });
+    }
+  });
+
+  // ===== Step check button clicks =====
+  document.addEventListener('click', (e) => {
+    const btn = e.target.closest('.step-check');
+    if (!btn) return;
+    toggleStep(parseInt(btn.dataset.step));
+  });
+
+  // ===== Checklist overlay =====
+  floatCheckBtn.addEventListener('click', () => {
+    checklistOverlay.classList.add('open');
+    buildChecklist();
+  });
+  clClose.addEventListener('click', () => {
+    checklistOverlay.classList.remove('open');
+  });
+  checklistOverlay.addEventListener('click', (e) => {
+    if (e.target === checklistOverlay) checklistOverlay.classList.remove('open');
+  });
+  clList.addEventListener('click', (e) => {
+    const li = e.target.closest('li');
+    if (!li) return;
+    toggleStep(parseInt(li.dataset.step));
   });
 
   // ===== Envelope =====
-  envelope.addEventListener('click', () => {
+  envelopeBig.addEventListener('click', () => {
     if (envelopeOpened) return;
     envelopeOpened = true;
-    envelope.classList.add('opened');
-
-    // Delay showing letter content to let envelope animation finish
+    envelopeBig.classList.add('opened');
     setTimeout(() => {
-      envelopeWrap.style.display = 'none';
-      letterContent.classList.add('visible');
+      screenEnvelope.style.display = 'none';
+      screenLetter.classList.add('visible');
+      screenLetter.style.display = 'flex';
       showLetterPage(0);
+      // Recalculate scroll snap
+      setTimeout(() => screenLetter.scrollIntoView({ behavior: 'smooth' }), 100);
     }, 800);
   });
 
-  // ===== Letter Page Navigation =====
+  // ===== Letter pages =====
   function showLetterPage(page) {
     currentLetterPage = page;
-    document.querySelectorAll('.letter-page').forEach((p, i) => {
-      p.classList.toggle('hidden', i !== page);
-    });
-    letterPrev.disabled = page === 0;
-    letterNext.disabled = page === 2;
-    letterPageIndicator.textContent = `${page + 1} / 3`;
+    for (let i = 0; i < 3; i++) {
+      const el = document.getElementById('letterPage' + i);
+      if (el) el.classList.toggle('hidden', i !== page);
+    }
+    lPrev.disabled = page === 0;
+    lNext.disabled = page === 2;
+    lIndicator.textContent = `${page + 1} / 3`;
   }
+  lPrev.addEventListener('click', () => { if (currentLetterPage > 0) showLetterPage(currentLetterPage - 1); });
+  lNext.addEventListener('click', () => { if (currentLetterPage < 2) showLetterPage(currentLetterPage + 1); });
 
-  letterPrev.addEventListener('click', () => {
-    if (currentLetterPage > 0) showLetterPage(currentLetterPage - 1);
+  // ===== Keyboard =====
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') checklistOverlay.classList.remove('open');
   });
 
-  letterNext.addEventListener('click', () => {
-    if (currentLetterPage < 2) showLetterPage(currentLetterPage + 1);
+  // ===== Scroll observer =====
+  let scrollTicking = false;
+  window.addEventListener('scroll', () => {
+    if (!scrollTicking) {
+      requestAnimationFrame(() => {
+        updateSidebarDots();
+        scrollTicking = false;
+      });
+      scrollTicking = true;
+    }
   });
 
   // ===== Init =====
-  buildCards();
+  buildProgressDots();
   buildChecklist();
-  goToCard(0);
+  syncAllUI();
+  updateSidebarDots();
 
 })();
 </script>
