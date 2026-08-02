@@ -1,1115 +1,184 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>艾毓灵 & 瑶瑶 · 订婚之礼</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&family=Noto+Serif+SC:wght@300;400;600;700;900&display=swap" rel="stylesheet">
-<style>
-  :root {
-    --primary: #8B1A2B;
-    --primary-light: #A52235;
-    --accent: #D4A574;
-    --accent-light: #E8C9A8;
-    --bg: #FAF8F5;
-    --bg-alt: #F3EFEA;
-    --text: #1A1A1A;
-    --text-muted: #6B6B6B;
-    --white: #FFFFFF;
-    --letter-bg: #FDF8F0;
-  }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html {
-    scroll-behavior: smooth;
-    scroll-snap-type: y mandatory;
-    overflow-y: scroll;
-    scrollbar-width: none;
-  }
-  html::-webkit-scrollbar { display: none; }
-
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    -webkit-font-smoothing: antialiased;
-  }
-
-  /* ===== Fullscreen Section ===== */
-  .screen {
-    min-height: 100vh;
-    min-height: 100dvh;
-    scroll-snap-align: start;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    overflow: hidden;
-    padding: 40px 24px;
-  }
-
-  /* ===== Progress Sidebar ===== */
-  .progress-side {
-    position: fixed;
-    right: 28px;
-    top: 50%;
-    transform: translateY(-50%);
-    z-index: 100;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
-  .progress-side .p-dot {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: #D4C8B8;
-    cursor: pointer;
-    transition: all 0.4s ease;
-  }
-  .progress-side .p-dot.active {
-    background: var(--primary);
-    box-shadow: 0 0 0 4px rgba(139,26,43,0.15);
-    width: 10px;
-    height: 10px;
-  }
-  .progress-side .p-dot.done {
-    background: var(--primary);
-    opacity: 0.5;
-  }
-  @media (max-width: 768px) {
-    .progress-side { right: 10px; gap: 8px; }
-    .progress-side .p-dot { width: 6px; height: 6px; }
-    .progress-side .p-dot.active { width: 8px; height: 8px; }
-  }
-
-  /* ===== Hero Screen ===== */
-  .screen-hero {
-    background: var(--bg);
-    flex-direction: column;
-    text-align: center;
-  }
-  .screen-hero::before {
-    content: '';
-    position: absolute;
-    width: 600px; height: 600px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(212,165,116,0.12) 0%, transparent 70%);
-    top: 50%; left: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-  }
-  .screen-hero .hero-ring {
-    position: absolute;
-    width: 300px; height: 300px;
-    border: 1px solid rgba(212,165,116,0.2);
-    border-radius: 50%;
-    top: calc(50% - 150px);
-    left: calc(50% - 150px);
-    pointer-events: none;
-    animation: ringPulse 4s ease-in-out infinite;
-  }
-  @keyframes ringPulse {
-    0%, 100% { transform: scale(1); opacity: 0.4; }
-    50% { transform: scale(1.08); opacity: 0.15; }
-  }
-  .hero-top-line {
-    font-family: 'Noto Serif SC', serif;
-    font-size: clamp(14px, 2vw, 16px);
-    color: var(--accent);
-    letter-spacing: 8px;
-    margin-bottom: 32px;
-    position: relative;
-  }
-  .hero-names {
-    font-family: 'Noto Serif SC', serif;
-    font-size: clamp(36px, 8vw, 64px);
-    font-weight: 900;
-    color: var(--primary);
-    line-height: 1.3;
-    position: relative;
-  }
-  .hero-amp {
-    font-weight: 300;
-    font-size: 0.7em;
-    color: var(--accent);
-    display: block;
-  }
-  .hero-subtitle {
-    font-family: 'Noto Serif SC', serif;
-    font-size: clamp(18px, 3.5vw, 26px);
-    color: var(--text);
-    margin-top: 20px;
-    letter-spacing: 6px;
-    position: relative;
-  }
-  .hero-decor {
-    width: 80px; height: 1px;
-    background: var(--accent);
-    margin: 32px auto 0;
-    position: relative;
-  }
-  .scroll-down {
-    position: absolute;
-    bottom: 40px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 8px;
-    animation: floatDown 2.5s ease-in-out infinite;
-  }
-  .scroll-down span {
-    font-size: 11px;
-    letter-spacing: 3px;
-    color: var(--text-muted);
-  }
-  .scroll-down svg { width: 22px; height: 22px; stroke: var(--accent); }
-  @keyframes floatDown {
-    0%, 100% { transform: translateX(-50%) translateY(0); opacity: 1; }
-    50% { transform: translateX(-50%) translateY(10px); opacity: 0.5; }
-  }
-
-  /* ===== Step Screen ===== */
-  .screen-step {
-    background: var(--white);
-    flex-direction: column;
-    text-align: center;
-    gap: 16px;
-  }
-  .screen-step:nth-child(even) { background: var(--bg-alt); }
-
-  .step-badge {
-    font-family: 'Noto Serif SC', serif;
-    font-size: 13px;
-    letter-spacing: 4px;
-    color: var(--accent);
-    text-transform: uppercase;
-  }
-  .step-icon-wrap {
-    width: 120px; height: 120px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba(212,165,116,0.12), rgba(212,165,116,0.04));
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin: 8px 0;
-  }
-  .step-icon-wrap .s-icon {
-    font-size: 52px;
-    line-height: 1;
-  }
-  .step-number {
-    font-family: 'Noto Serif SC', serif;
-    font-size: clamp(48px, 12vw, 96px);
-    font-weight: 900;
-    color: rgba(139,26,43,0.06);
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    pointer-events: none;
-    user-select: none;
-    line-height: 1;
-  }
-  .step-title {
-    font-family: 'Noto Serif SC', serif;
-    font-size: clamp(24px, 5vw, 36px);
-    font-weight: 700;
-    color: var(--text);
-    position: relative;
-    z-index: 1;
-  }
-  .step-desc {
-    font-size: clamp(15px, 2.5vw, 17px);
-    color: var(--text-muted);
-    max-width: 400px;
-    line-height: 1.8;
-  }
-  .step-check {
-    margin-top: 16px;
-    width: 56px; height: 56px;
-    border-radius: 50%;
-    border: 2px solid #E0D5C8;
-    background: var(--white);
-    cursor: pointer;
-    font-size: 24px;
-    color: transparent;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.4s ease;
-    position: relative;
-    z-index: 1;
-  }
-  .step-check:hover {
-    border-color: var(--primary);
-  }
-  .step-check.done {
-    background: #5B8C5A;
-    border-color: #5B8C5A;
-    color: #fff;
-    box-shadow: 0 4px 20px rgba(91,140,90,0.3);
-  }
-  .step-nav-hint {
-    position: absolute;
-    bottom: 36px;
-    font-size: 12px;
-    color: #C4B8A8;
-    letter-spacing: 2px;
-  }
-
-  /* Background number watermark */
-  .screen-step .bg-num {
-    position: absolute;
-    font-family: 'Noto Serif SC', serif;
-    font-size: clamp(120px, 25vw, 240px);
-    font-weight: 900;
-    color: rgba(0,0,0,0.015);
-    pointer-events: none;
-    user-select: none;
-    line-height: 1;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  /* ===== Envelope Screen ===== */
-  .screen-envelope {
-    background: linear-gradient(180deg, #F3EFEA 0%, #E8E0D5 100%);
-    flex-direction: column;
-    text-align: center;
-  }
-  .envelope-heading {
-    font-family: 'Noto Serif SC', serif;
-    font-size: clamp(20px, 4vw, 28px);
-    color: var(--primary);
-    margin-bottom: 48px;
-    letter-spacing: 4px;
-  }
-  .envelope-big {
-    position: relative;
-    width: min(440px, 85vw);
-    height: 280px;
-    cursor: pointer;
-    transition: transform 0.3s ease;
-  }
-  .envelope-big:hover { transform: translateY(-6px); }
-  .envelope-big .env-body {
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(145deg, #EAD9C5, #D4B896);
-    border-radius: 20px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.1), 0 4px 16px rgba(0,0,0,0.06);
-    overflow: hidden;
-  }
-  .envelope-big .env-body::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      linear-gradient(45deg, transparent 48%, rgba(255,255,255,0.03) 48%, rgba(255,255,255,0.03) 52%, transparent 52%),
-      linear-gradient(-45deg, transparent 48%, rgba(0,0,0,0.02) 48%, rgba(0,0,0,0.02) 52%, transparent 52%);
-    background-size: 40px 40px;
-  }
-  .envelope-big .env-flap {
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 170px;
-    background: linear-gradient(160deg, #D4B896, #C4A67A);
-    clip-path: polygon(0 0, 50% 100%, 100% 0);
-    border-radius: 20px 20px 0 0;
-    transform-origin: top center;
-    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 2;
-  }
-  .envelope-big.opened .env-flap {
-    transform: rotateX(180deg);
-  }
-  .envelope-big .env-seal {
-    position: absolute;
-    top: 118px; left: 50%;
-    transform: translateX(-50%);
-    width: 56px; height: 56px;
-    background: var(--primary);
-    border-radius: 50%;
-    z-index: 3;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-family: 'Noto Serif SC', serif;
-    font-size: 16px;
-    box-shadow: 0 4px 16px rgba(139,26,43,0.4);
-    transition: all 0.5s ease;
-  }
-  .envelope-big.opened .env-seal {
-    transform: translateX(-50%) scale(0);
-    opacity: 0;
-  }
-  .envelope-big .env-to {
-    position: absolute;
-    bottom: 42px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-family: 'Noto Serif SC', serif;
-    font-size: clamp(18px, 3vw, 22px);
-    color: var(--primary);
-    letter-spacing: 6px;
-    z-index: 1;
-    transition: opacity 0.4s ease;
-  }
-  .envelope-big.opened .env-to { opacity: 0; }
-  .envelope-big .env-tap {
-    position: absolute;
-    bottom: 14px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 13px;
-    color: var(--text-muted);
-    z-index: 1;
-    animation: pulse 2s infinite;
-  }
-  @keyframes pulse {
-    0%, 100% { opacity: 0.4; }
-    50% { opacity: 1; }
-  }
-
-  /* ===== Letter Screen ===== */
-  .screen-letter {
-    background: var(--letter-bg);
-    flex-direction: column;
-    display: none;
-    padding: 60px 24px;
-  }
-  .screen-letter.visible { display: flex; }
-  .letter-sheet {
-    background: var(--letter-bg);
-    max-width: 600px;
-    width: 100%;
-    min-height: 60vh;
-    padding: clamp(32px, 6vw, 56px) clamp(24px, 5vw, 48px) clamp(32px, 6vw, 56px) clamp(40px, 7vw, 64px);
-    position: relative;
-    box-shadow: 0 8px 40px rgba(0,0,0,0.06);
-    border-radius: 4px;
-    /* lined paper */
-    background-image:
-      repeating-linear-gradient(
-        transparent, transparent 31px,
-        rgba(180,160,140,0.12) 31px,
-        rgba(180,160,140,0.12) 32px
-      );
-    background-position: 0 64px;
-  }
-  .letter-sheet::before {
-    content: '';
-    position: absolute;
-    left: clamp(48px, 9vw, 72px);
-    top: 0; bottom: 0;
-    width: 1px;
-    background: rgba(200,170,150,0.2);
-  }
-  .letter-body {
-    font-family: 'Ma Shan Zheng', cursive;
-    font-size: clamp(18px, 3vw, 22px);
-    line-height: 2;
-    color: #3D2B1F;
-  }
-  .letter-body .l-salute {
-    font-size: 0.9em;
-    margin-bottom: 16px;
-  }
-  .letter-body p { margin-bottom: 10px; }
-  .letter-body .l-sign {
-    text-align: right;
-    margin-top: 28px;
-    font-size: 0.9em;
-  }
-  .letter-pages {
-    display: flex;
-    align-items: center;
-    gap: 20px;
-    margin-top: 28px;
-  }
-  .letter-pages button {
-    width: 44px; height: 44px;
-    border-radius: 50%;
-    border: 1.5px solid #D4C8B8;
-    background: #fff;
-    cursor: pointer;
-    font-size: 18px;
-    color: var(--text);
-    transition: all 0.2s;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-  .letter-pages button:hover:not(:disabled) {
-    border-color: var(--primary);
-    color: var(--primary);
-  }
-  .letter-pages button:disabled { opacity: 0.25; cursor: default; }
-  .letter-pages .lp-indicator {
-    font-size: 14px;
-    color: var(--text-muted);
-    min-width: 40px;
-    text-align: center;
-  }
-
-  /* ===== Quotes + Footer Screen ===== */
-  .screen-quotes {
-    background: var(--bg);
-    flex-direction: column;
-    text-align: center;
-    gap: 32px;
-  }
-  .quotes-heading {
-    font-family: 'Noto Serif SC', serif;
-    font-size: clamp(20px, 3.5vw, 26px);
-    color: var(--text);
-    letter-spacing: 3px;
-  }
-  .quote-big {
-    font-family: 'Noto Serif SC', serif;
-    font-size: clamp(18px, 3vw, 22px);
-    color: var(--primary);
-    max-width: 500px;
-    line-height: 2;
-    padding: 32px 24px;
-    background: var(--white);
-    border-radius: 16px;
-    box-shadow: 0 8px 30px rgba(0,0,0,0.05);
-    position: relative;
-  }
-  .quote-big::before {
-    content: '"';
-    position: absolute;
-    top: -14px; left: 20px;
-    font-family: 'Noto Serif SC', serif;
-    font-size: 48px;
-    color: var(--accent);
-    opacity: 0.35;
-    line-height: 1;
-  }
-  .footer-note {
-    font-size: 14px;
-    color: var(--text-muted);
-    letter-spacing: 2px;
-    margin-top: 20px;
-  }
-
-  /* ===== Checklist float button ===== */
-  .float-checklist-btn {
-    position: fixed;
-    bottom: 28px;
-    right: 28px;
-    z-index: 200;
-    width: 52px; height: 52px;
-    border-radius: 50%;
-    background: var(--primary);
-    color: #fff;
-    border: none;
-    font-size: 22px;
-    cursor: pointer;
-    box-shadow: 0 4px 20px rgba(139,26,43,0.35);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s ease;
-  }
-  .float-checklist-btn:hover {
-    transform: scale(1.08);
-    box-shadow: 0 6px 28px rgba(139,26,43,0.45);
-  }
-  .float-badge {
-    position: absolute;
-    top: -4px; right: -4px;
-    width: 20px; height: 20px;
-    border-radius: 50%;
-    background: #fff;
-    color: var(--primary);
-    font-size: 11px;
-    font-weight: 700;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-  }
-
-  /* Checklist Overlay */
-  .checklist-overlay {
-    position: fixed;
-    inset: 0;
-    z-index: 300;
-    background: rgba(0,0,0,0.5);
-    backdrop-filter: blur(4px);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    pointer-events: none;
-    transition: opacity 0.35s ease;
-  }
-  .checklist-overlay.open {
-    opacity: 1;
-    pointer-events: auto;
-  }
-  .checklist-panel {
-    background: var(--white);
-    border-radius: 24px;
-    width: min(440px, 90vw);
-    max-height: 75vh;
-    overflow-y: auto;
-    padding: 32px 24px;
-    box-shadow: 0 20px 60px rgba(0,0,0,0.2);
-    transform: translateY(20px);
-    transition: transform 0.35s ease;
-  }
-  .checklist-overlay.open .checklist-panel {
-    transform: translateY(0);
-  }
-  .checklist-panel h3 {
-    font-family: 'Noto Serif SC', serif;
-    font-size: 20px;
-    text-align: center;
-    margin-bottom: 8px;
-    color: var(--primary);
-  }
-  .cl-progress-bar {
-    height: 4px;
-    background: #E8D5C4;
-    border-radius: 2px;
-    margin: 16px 0;
-    overflow: hidden;
-  }
-  .cl-progress-fill {
-    height: 100%;
-    background: var(--primary);
-    border-radius: 2px;
-    transition: width 0.4s ease;
-  }
-  .cl-progress-text {
-    text-align: center;
-    font-size: 13px;
-    color: var(--text-muted);
-    margin-bottom: 16px;
-  }
-  .checklist-panel .cl-list {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
-  .checklist-panel .cl-list li {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 16px;
-    border-radius: 12px;
-    cursor: pointer;
-    transition: all 0.2s;
-    font-size: 15px;
-  }
-  .checklist-panel .cl-list li:active { background: #F5F0EB; }
-  .checklist-panel .cl-list .cl-dot {
-    width: 24px; height: 24px;
-    border-radius: 50%;
-    border: 2px solid #D4C8B8;
-    flex-shrink: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.3s;
-    font-size: 12px;
-    color: transparent;
-  }
-  .checklist-panel .cl-list li.done .cl-dot {
-    background: #5B8C5A;
-    border-color: #5B8C5A;
-    color: #fff;
-  }
-  .checklist-panel .cl-list li.done .cl-label {
-    text-decoration: line-through;
-    color: #AAA;
-  }
-  .cl-close {
-    display: block;
-    margin: 24px auto 0;
-    padding: 10px 32px;
-    border-radius: 24px;
-    border: 1.5px solid #D4C8B8;
-    background: #fff;
-    font-size: 15px;
-    cursor: pointer;
-    transition: all 0.2s;
-  }
-  .cl-close:hover { border-color: var(--primary); color: var(--primary); }
-
-  /* ===== Utilities ===== */
-  .hidden { display: none !important; }
-
-  /* ===== Swipe hint for mobile ===== */
-  .swipe-hint {
-    position: absolute;
-    bottom: 24px;
-    left: 50%;
-    transform: translateX(-50%);
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    animation: swipeHint 2s ease-in-out infinite;
-    pointer-events: none;
-  }
-  .swipe-hint svg { width: 18px; height: 18px; }
-  @keyframes swipeHint {
-    0%, 100% { opacity: 0.3; transform: translateX(-50%) translateX(-4px); }
-    50% { opacity: 0.7; transform: translateX(-50%) translateX(4px); }
-  }
-
-  @media (min-width: 768px) {
-    .screen { padding: 60px 40px; }
-  }
-</style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow, noarchive">
+  <meta name="theme-color" content="#7d1727">
+  <title>艾毓灵 &amp; 瑶瑶 · 订婚之礼</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Ma+Shan+Zheng&amp;family=Noto+Serif+SC:wght@400;600;700;900&amp;display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
 </head>
 <body>
+  <main>
+    <section id="cover" class="view cover-view is-active" data-view="cover" aria-labelledby="cover-title">
+      <div class="cloud cloud-one" aria-hidden="true"></div>
+      <div class="cloud cloud-two" aria-hidden="true"></div>
+      <div class="cover-frame" aria-hidden="true"></div>
+      <div class="cover-content">
+        <p class="eyebrow">贰零贰陆 · 捌月贰日</p>
+        <p class="double-happiness" aria-hidden="true">囍</p>
+        <h1 id="cover-title">
+          <span>艾毓灵</span>
+          <b>&amp;</b>
+          <span>瑶瑶</span>
+        </h1>
+        <p class="cover-subtitle">订 婚 之 礼</p>
+        <p class="cover-place">贵 溪</p>
+        <div class="cover-actions">
+          <button class="primary-action" type="button" data-action="go-ready">仪式开始</button>
+          <button class="text-action" type="button" data-action="direct-letter">直接看信</button>
+        </div>
+      </div>
+      <p class="cover-note">一封写给爸爸妈妈的信</p>
+    </section>
 
-<!-- ===== Progress Sidebar ===== -->
-<nav class="progress-side" id="progressSide" aria-label="页面导航"></nav>
+    <section id="ready" class="view ready-view" data-view="ready" aria-labelledby="ready-title" aria-hidden="true">
+      <div class="compact-shell">
+        <p class="section-kicker">开始之前</p>
+        <h2 id="ready-title">都准备好了吗？</h2>
+        <p class="section-intro">不用复杂，确认三件事就正式开始。</p>
+        <ul class="ready-list" aria-label="开始前确认">
+          <li><span aria-hidden="true">👨‍👩‍👧‍👦</span><b>人已到齐</b></li>
+          <li><span aria-hidden="true">🍵</span><b>茶已倒好</b></li>
+          <li><span aria-hidden="true">🔕</span><b>手机已静音</b></li>
+        </ul>
+        <blockquote class="opening-cue">
+          爸、妈，大家都到齐了。今天我们不办复杂的仪式，主要是想认真跟你们说说我们的心意。
+        </blockquote>
+        <button class="primary-action wide-action" type="button" data-action="start-ceremony">开始仪式</button>
+        <button class="text-action" type="button" data-action="go-cover">返回封面</button>
+      </div>
+    </section>
 
-<!-- ===== Float Checklist Button ===== -->
-<button class="float-checklist-btn" id="floatCheckBtn" aria-label="查看清单">
-  📋
-  <span class="float-badge hidden" id="floatBadge">0</span>
-</button>
+    <section id="envelope" class="view envelope-view" data-view="envelope" aria-labelledby="envelope-title" aria-hidden="true">
+      <div class="compact-shell envelope-shell">
+        <p class="section-kicker">仪式第一件事</p>
+        <h2 id="envelope-title">给瑶瑶爸爸妈妈的一封信</h2>
+        <div class="envelope" id="envelopeGraphic" aria-hidden="true">
+          <div class="letter-peek"><span>给爸爸妈妈</span></div>
+          <div class="envelope-back"></div>
+          <div class="envelope-front"></div>
+          <div class="envelope-flap"></div>
+          <div class="wax-seal">艾</div>
+        </div>
+        <p class="envelope-to">瑶瑶爸爸妈妈　亲启</p>
+      </div>
+    </section>
 
-<!-- ===== Checklist Overlay ===== -->
-<div class="checklist-overlay" id="checklistOverlay">
-  <div class="checklist-panel">
-    <h3>📋 订婚流程清单</h3>
-    <div class="cl-progress-bar"><div class="cl-progress-fill" id="clProgressFill" style="width:0%"></div></div>
-    <p class="cl-progress-text" id="clProgressText">已完成 0/12</p>
-    <ul class="cl-list" id="clList"></ul>
-    <button class="cl-close" id="clClose">关闭</button>
-  </div>
-</div>
+    <section id="letter" class="view reader-view" data-view="letter" aria-labelledby="letter-title" aria-hidden="true">
+      <header class="reader-header">
+        <button class="icon-action" type="button" data-action="go-cover" aria-label="返回封面">←</button>
+        <p>给瑶瑶爸爸妈妈的一封信</p>
+        <div class="font-controls" aria-label="调整信件字号">
+          <button type="button" data-action="font-decrease" aria-label="减小字号">A−</button>
+          <button type="button" data-action="font-increase" aria-label="增大字号">A＋</button>
+        </div>
+      </header>
 
-<!-- ============================================= -->
-<!-- ===== SCREEN 1: HERO ===== -->
-<!-- ============================================= -->
-<section class="screen screen-hero" id="screen-hero" data-screen="0">
-  <div class="hero-ring"></div>
-  <p class="hero-top-line">贰零贰陆 · 捌月贰日</p>
-  <h1 class="hero-names">
-    艾毓灵<span class="hero-amp">&amp;</span>瑶瑶
-  </h1>
-  <p class="hero-subtitle">订 婚 之 礼</p>
-  <div class="hero-decor"></div>
-  <div class="scroll-down">
-    <span>向 下 浏 览</span>
-    <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg>
-  </div>
-</section>
+      <p class="reader-status" id="readerStatus" aria-live="polite"></p>
 
-<!-- ============================================= -->
-<!-- ===== SCREEN 2-13: EACH STEP ===== -->
-<!-- ============================================= -->
-<section class="screen screen-step" data-screen="1">
-  <div class="bg-num">01</div>
-  <span class="step-badge">第 一 步</span>
-  <div class="step-icon-wrap"><span class="s-icon">🎁</span></div>
-  <h2 class="step-title">男方提聘礼上门</h2>
-  <p class="step-desc">聘礼登门 · 正式结亲</p>
-  <button class="step-check" data-step="0" aria-label="标记完成"></button>
-</section>
+      <article class="letter-copy" aria-labelledby="letter-title">
+        <div class="letter-heading">
+          <p class="letter-mark" aria-hidden="true">囍</p>
+          <h2 id="letter-title">给瑶瑶爸爸妈妈</h2>
+          <p>一封没有纸张，却想亲口念给你们听的信</p>
+        </div>
 
-<section class="screen screen-step" data-screen="2">
-  <div class="bg-num">02</div>
-  <span class="step-badge">第 二 步</span>
-  <div class="step-icon-wrap"><span class="s-icon">🍽️</span></div>
-  <h2 class="step-title">女方备宴迎客</h2>
-  <p class="step-desc">一桌家宴 · 迎客入席</p>
-  <button class="step-check" data-step="1" aria-label="标记完成"></button>
-</section>
+        <p class="letter-salute">你好叔叔，阿姨！</p>
 
-<section class="screen screen-step" data-screen="3">
-  <div class="bg-num">03</div>
-  <span class="step-badge">第 三 步</span>
-  <div class="step-icon-wrap"><span class="s-icon">🍵</span></div>
-  <h2 class="step-title">大家喝茶坐</h2>
-  <p class="step-desc">热茶沏上 · 两家交心</p>
-  <button class="step-check" data-step="2" aria-label="标记完成"></button>
-</section>
+        <p>我是小艾，感觉是一下子闯入你们家人的一个人。在今日要和瑶瑶正式订婚。非常感谢你们的付出，让一位非常好的人可以成为我的未来的妻子。你们肯定也吃了很多苦，一下子将家里的三位小孩都抚养成人，并且成才。你们真的辛苦了，非常感谢你们！</p>
 
-<section class="screen screen-step" data-screen="4">
-  <div class="bg-num">04</div>
-  <span class="step-badge">第 四 步</span>
-  <div class="step-icon-wrap"><span class="s-icon">🧧</span></div>
-  <h2 class="step-title">提彩礼，给红包</h2>
-  <p class="step-desc">彩礼递上 · 诚意致谢</p>
-  <button class="step-check" data-step="3" aria-label="标记完成"></button>
-</section>
+        <p>我相信瑶瑶是一位很好的人，很值得托付后背的人，也是对我很好的人。瑶瑶在我心里的分量真的很重很重，是不知不觉地就占据了心里的高地的那种。所以我也不希望瑶瑶再哭泣，反而可以在我这里发发歪歪。</p>
 
-<section class="screen screen-step" data-screen="5">
-  <div class="bg-num">05</div>
-  <span class="step-badge">第 五 步</span>
-  <div class="step-icon-wrap"><span class="s-icon">💝</span></div>
-  <h2 class="step-title">给弟弟妹妹见面礼</h2>
-  <p class="step-desc">弟妹红包 · 一家人整齐</p>
-  <button class="step-check" data-step="4" aria-label="标记完成"></button>
-</section>
+        <p>瑶瑶真的很爱你们，爱瑶瑶的爸爸妈妈，爱瑶瑶的妹妹，爱瑶瑶的弟弟。都是自己的至亲哪有不爱的呢？都是瑶瑶爱的人，那就要多多放在心里爱她。因为瑶瑶不仅是你们的女儿，也是姐姐，同时也是我的未来共度余生的妻子。你看瑶瑶多幸福，那么多人爱她。请真的多多爱她，我一个人爱瑶瑶可是会抢过你们对她的爱哦！哈哈哈哈哈哈。</p>
 
-<section class="screen screen-step" data-screen="6">
-  <div class="bg-num">06</div>
-  <span class="step-badge">第 六 步</span>
-  <div class="step-icon-wrap"><span class="s-icon">📷</span></div>
-  <h2 class="step-title">拍照留念</h2>
-  <p class="step-desc">全家合影 · 定格此刻</p>
-  <button class="step-check" data-step="5" aria-label="标记完成"></button>
-</section>
+        <p>瑶瑶无论在哪里，都会希望有家人在身边。瑶瑶真的很好很好！</p>
 
-<section class="screen screen-step" data-screen="7">
-  <div class="bg-num">07</div>
-  <span class="step-badge">第 七 步</span>
-  <div class="step-icon-wrap"><span class="s-icon">🥢</span></div>
-  <h2 class="step-title">吃饭（酒店送）</h2>
-  <p class="step-desc">共进午餐 · 其乐融融</p>
-  <button class="step-check" data-step="6" aria-label="标记完成"></button>
-</section>
+        <p>我家里有位哲人说过一句话：“大家都好好过，不是一个人的小家过好，是我们的家都过好，每一个人的小家过好，我们的整个大家就会更好。”叔叔阿姨也和和睦睦的，我和瑶瑶也恩恩爱爱的，妹妹和弟弟也互相帮助互相关心。我们整个家都会很好的。都会有的，什么都会有的。</p>
 
-<section class="screen screen-step" data-screen="8">
-  <div class="bg-num">08</div>
-  <span class="step-badge">第 八 步</span>
-  <div class="step-icon-wrap"><span class="s-icon">☕</span></div>
-  <h2 class="step-title">饭后茶叙</h2>
-  <p class="step-desc">喝茶中坐 · 闲话家常</p>
-  <button class="step-check" data-step="7" aria-label="标记完成"></button>
-</section>
+        <p>我会对瑶瑶好好的，我会和瑶瑶认认真真地过日子的。我们都踏踏实实的，脚踏实地的。只是叔叔阿姨给我和瑶瑶一些时间，如今我也要准备入学了，瑶瑶也刚刚正式开始工作。我们一切都刚刚开始。所以我估计又要出国读书，因此我想在订婚后，在出国前先和瑶瑶正式地把结婚证领了。望叔叔阿姨的批准。也算正式给瑶瑶一个交代。我很早就和瑶瑶说了，我在国外读书就像是一个风筝，风筝线永远都在国内，抓住风筝线的那个手永远都是瑶瑶的手。</p>
 
-<section class="screen screen-step" data-screen="9">
-  <div class="bg-num">09</div>
-  <span class="step-badge">第 九 步</span>
-  <div class="step-icon-wrap"><span class="s-icon">🧧</span></div>
-  <h2 class="step-title">出发前的打发红包</h2>
-  <p class="step-desc">临别红包 · 认亲礼成</p>
-  <button class="step-check" data-step="8" aria-label="标记完成"></button>
-</section>
+        <p>非常感谢你们对瑶瑶的爱，所以不要吝啬，请再多多爱我们。</p>
 
-<section class="screen screen-step" data-screen="10">
-  <div class="bg-num">10</div>
-  <span class="step-badge">第 十 步</span>
-  <div class="step-icon-wrap"><span class="s-icon">🚗</span></div>
-  <h2 class="step-title">1点半出发回永丰</h2>
-  <p class="step-desc">收拾行装 · 启程回家</p>
-  <button class="step-check" data-step="9" aria-label="标记完成"></button>
-</section>
+        <p>再次郑重地和叔叔阿姨说一声谢谢。</p>
 
-<section class="screen screen-step" data-screen="11">
-  <div class="bg-num">11</div>
-  <span class="step-badge">第十一步</span>
-  <div class="step-icon-wrap"><span class="s-icon">📦</span></div>
-  <h2 class="step-title">布置东西收拾带走</h2>
-  <p class="step-desc">清点打包 · 有来有回</p>
-  <button class="step-check" data-step="10" aria-label="标记完成"></button>
-</section>
+        <p class="letter-sign">2026年8月2日　贵溪<br><strong>艾毓灵</strong></p>
 
-<section class="screen screen-step" data-screen="12">
-  <div class="bg-num">12</div>
-  <span class="step-badge">第十二步</span>
-  <div class="step-icon-wrap"><span class="s-icon">🏠</span></div>
-  <h2 class="step-title">毓灵到家</h2>
-  <p class="step-desc">回到永丰 · 圆满礼成</p>
-  <button class="step-check" data-step="11" aria-label="标记完成"></button>
-</section>
+        <div class="letter-transition">
+          <p>谢谢叔叔阿姨愿意听我说完。</p>
+          <p>我今天说的这些，以后会用认真过日子的行动做到。</p>
+          <button class="primary-action wide-action" type="button" data-action="continue-flow">继续订婚流程</button>
+        </div>
+      </article>
+    </section>
 
-<!-- ============================================= -->
-<!-- ===== SCREEN 14: ENVELOPE ===== -->
-<!-- ============================================= -->
-<section class="screen screen-envelope" data-screen="13" id="screenEnvelope">
-  <h2 class="envelope-heading">给瑶瑶爸爸妈妈的一封信</h2>
-  <div class="envelope-big" id="envelopeBig">
-    <div class="env-body">
-      <div class="env-flap"></div>
-      <div class="env-seal">缄</div>
-      <p class="env-to">瑶瑶爸爸妈妈&ensp;亲启</p>
-      <p class="env-tap">👆 点击打开</p>
+    <section id="formal-flow" class="view flow-view" data-view="formal-flow" aria-labelledby="formal-title" aria-hidden="true">
+      <div class="flow-shell">
+        <p class="section-kicker">信读完以后</p>
+        <h2 id="formal-title">今天的订婚仪式</h2>
+        <p class="section-intro">只有六件事。点一下可以打卡，也可以打开大字卡拍照。</p>
+        <div class="progress-line" aria-hidden="true"><span id="formalProgressBar"></span></div>
+        <p class="progress-copy" id="formalProgress" aria-live="polite">已完成 0/6</p>
+        <ol class="check-list formal-list" id="formalList"></ol>
+
+        <details class="cue-lines">
+          <summary>现场话术</summary>
+          <div id="cueLines"></div>
+        </details>
+
+        <div class="view-actions">
+          <button class="secondary-action" type="button" data-action="show-schedule">查看当天安排</button>
+          <button class="primary-action" type="button" data-action="show-closing">进入纪念页</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="day-schedule" class="view schedule-view" data-view="day-schedule" aria-labelledby="schedule-title" aria-hidden="true">
+      <div class="flow-shell">
+        <p class="section-kicker">仪式之外</p>
+        <h2 id="schedule-title">今天余下安排</h2>
+        <p class="section-intro">这是家人对齐清单，不占正式仪式步骤。</p>
+        <p class="progress-copy" id="scheduleProgress" aria-live="polite">已完成 0/4</p>
+        <ul class="check-list schedule-list" id="scheduleList"></ul>
+        <div class="view-actions">
+          <button class="secondary-action" type="button" data-action="continue-flow">返回仪式流程</button>
+          <button class="primary-action" type="button" data-action="show-closing">进入纪念页</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="closing" class="view closing-view" data-view="closing" aria-labelledby="closing-title" aria-hidden="true">
+      <div class="closing-content">
+        <p class="closing-mark" aria-hidden="true">囍</p>
+        <h2 id="closing-title">礼成</h2>
+        <blockquote>
+          风筝线永远都在国内，<br>
+          抓住风筝线的那个手<br>
+          永远都是瑶瑶的手。
+        </blockquote>
+        <div class="closing-rule" aria-hidden="true"></div>
+        <p class="closing-names">艾毓灵 &amp; 瑶瑶</p>
+        <p class="closing-date">2026年8月2日 · 贵溪</p>
+        <div class="view-actions">
+          <button class="secondary-action" type="button" data-action="reread-letter">重读这封信</button>
+          <button class="primary-action" type="button" data-action="show-schedule">查看当天安排</button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <dialog class="formal-card-dialog" id="formalCardDialog" aria-labelledby="formalCardTitle">
+    <div class="formal-card-inner">
+      <button class="dialog-close" type="button" data-action="close-card" aria-label="关闭大字卡">×</button>
+      <p class="formal-card-number" id="formalCardNumber"></p>
+      <p class="formal-card-icon" id="formalCardIcon" aria-hidden="true"></p>
+      <h2 id="formalCardTitle"></h2>
+      <button class="primary-action" id="formalCardCheck" type="button">标记完成</button>
     </div>
-  </div>
-  <p class="step-nav-hint">↓ 继续下滑</p>
-</section>
-
-<!-- ============================================= -->
-<!-- ===== SCREEN 15: LETTER ===== -->
-<!-- ============================================= -->
-<section class="screen screen-letter" data-screen="14" id="screenLetter">
-  <div class="letter-sheet">
-    <div class="letter-body" data-page="0" id="letterPage0">
-      <p class="l-salute">你好叔叔，阿姨！</p>
-      <p>我是小艾，感觉是一下子闯入你们家人的一个人。在今日要和瑶瑶正式订婚。非常感谢你们的付出，让一位非常好的人可以成为我的未来的妻子。你们肯定也吃了很多苦，一下子将家里的三位小孩都抚养成人，并且成才。你们真的辛苦了，非常感谢你们！</p>
-      <p>我相信瑶瑶是一位很好的人，很值得托付后背的人，也是对我很好的人。瑶瑶在我心里的分量真的很重很重，是不知不觉地就占据了心里的高地的那种。所以我也不希望瑶瑶再哭泣，反而可以在我这里发发歪歪。</p>
-    </div>
-    <div class="letter-body hidden" data-page="1" id="letterPage1">
-      <p>瑶瑶真的很爱你们，爱瑶瑶的爸爸妈妈，爱瑶瑶的妹妹，爱瑶瑶的弟弟。都是自己的至亲哪有不爱的呢？都是瑶瑶爱的人，那就要多多放在心里爱她。因为瑶瑶不仅是你们的女儿，也是姐姐，同时也是我的未来共度余生的妻子。你看瑶瑶多幸福，那么多人爱她。请真的多多爱她，我一个人爱瑶瑶可是会抢过你们对她的爱哦！哈哈哈哈哈哈。</p>
-      <p>瑶瑶无论在哪里，都会希望有家人在身边。瑶瑶真的很好很好！</p>
-    </div>
-    <div class="letter-body hidden" data-page="2" id="letterPage2">
-      <p>我家里有位哲人说过一句话："大家都好好过，不是一个人的小家过好，是我们的家都过好，每一个人的小家过好，我们的整个大家就会更好。"叔叔阿姨也和和睦睦的，我和瑶瑶也恩恩爱爱的，妹妹和弟弟也互相帮助互相关心。我们整个家都会很好的。都会有的，什么都会有的。</p>
-      <p>我会对瑶瑶好好的，我会和瑶瑶认认真真地过日子的。我们都踏踏实实的，脚踏实地的。只是叔叔阿姨给我和瑶瑶一些时间，如今我也要准备入学了，瑶瑶也刚刚正式开始工作。我们一切都刚刚开始。所以我估计又要出国读书，因此我想在订婚后，在出国前先和瑶瑶正式地把结婚证领了。望叔叔阿姨的批准。也算正式给瑶瑶一个交代。我很早就和瑶瑶说了，我在国外读书就像是一个风筝，风筝线永远都在国内，抓住风筝线的那个手永远都是瑶瑶的手。</p>
-      <p>非常感谢你们对瑶瑶的爱，所以不要吝啬，请再多多爱我们。</p>
-      <p>再次郑重地和叔叔阿姨说一声谢谢。</p>
-      <p class="l-sign">2026年8月2日&ensp;贵溪<br>艾毓灵</p>
-    </div>
-  </div>
-  <div class="letter-pages">
-    <button id="lPrev" disabled>◂</button>
-    <span class="lp-indicator" id="lIndicator">1 / 3</span>
-    <button id="lNext">▸</button>
-  </div>
-</section>
-
-<!-- ============================================= -->
-<!-- ===== SCREEN 16: QUOTES + FOOTER ===== -->
-<!-- ============================================= -->
-<section class="screen screen-quotes" data-screen="15">
-  <div class="quote-big">
-    风筝线永远都在国内，<br>抓住风筝线的那个手<br>永远都是瑶瑶的手。
-  </div>
-  <div class="quote-big">
-    瑶瑶在我心里的分量<br>真的很重很重。
-  </div>
-  <div class="quote-big">
-    请再多多爱我们。
-  </div>
-  <div class="hero-decor"></div>
-  <p class="footer-note">💝</p>
-  <p class="footer-note">艾毓灵 &amp; 瑶瑶 · 订婚之礼</p>
-  <p class="footer-note">2026年8月2日 · 贵溪</p>
-</section>
-
-<script>
-(function() {
-  const TOTAL_STEPS = 12;
-  const STORAGE_KEY = 'engagement_checks';
-
-  // ===== State =====
-  let checked = new Array(TOTAL_STEPS).fill(false);
-  let currentLetterPage = 0;
-  let envelopeOpened = false;
-
-  try {
-    const s = localStorage.getItem(STORAGE_KEY);
-    if (s) { const p = JSON.parse(s); if (Array.isArray(p) && p.length === TOTAL_STEPS) checked = p; }
-  } catch(e) {}
-
-  function save() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(checked)); } catch(e) {} }
-
-  function countDone() { return checked.filter(Boolean).length; }
-
-  // ===== DOM =====
-  const progressSide = document.getElementById('progressSide');
-  const floatBadge = document.getElementById('floatBadge');
-  const checklistOverlay = document.getElementById('checklistOverlay');
-  const clList = document.getElementById('clList');
-  const clProgressFill = document.getElementById('clProgressFill');
-  const clProgressText = document.getElementById('clProgressText');
-  const clClose = document.getElementById('clClose');
-  const floatCheckBtn = document.getElementById('floatCheckBtn');
-  const envelopeBig = document.getElementById('envelopeBig');
-  const screenEnvelope = document.getElementById('screenEnvelope');
-  const screenLetter = document.getElementById('screenLetter');
-  const lPrev = document.getElementById('lPrev');
-  const lNext = document.getElementById('lNext');
-  const lIndicator = document.getElementById('lIndicator');
-
-  // ===== Build Progress Sidebar =====
-  function buildProgressDots() {
-    const screens = document.querySelectorAll('.screen[data-screen]');
-    const total = screens.length;
-    let html = '';
-    for (let i = 0; i < total; i++) {
-      html += `<span class="p-dot" data-index="${i}" title="第${i+1}屏"></span>`;
-    }
-    progressSide.innerHTML = html;
-  }
-
-  // ===== Build Checklist Overlay =====
-  const stepLabels = [
-    '男方提聘礼上门', '女方准备一桌饭', '大家喝茶坐',
-    '开始提彩礼，给红包', '给弟弟妹妹见面礼', '拍照',
-    '吃饭（酒店送）', '吃完饭喝点茶中坐聊聊天', '出发前的打发红包',
-    '1点半左右出发回永丰', '布置东西收拾带走', '毓灵在家'
-  ];
-
-  function buildChecklist() {
-    clList.innerHTML = stepLabels.map((label, i) => `
-      <li data-step="${i}" class="${checked[i] ? 'done' : ''}">
-        <span class="cl-dot">${checked[i] ? '✓' : ''}</span>
-        <span class="cl-label">${label}</span>
-      </li>
-    `).join('');
-    updateChecklistProgress();
-  }
-
-  function updateChecklistProgress() {
-    const done = countDone();
-    const pct = (done / TOTAL_STEPS) * 100;
-    clProgressFill.style.width = pct + '%';
-    clProgressText.textContent = `已完成 ${done}/${TOTAL_STEPS}`;
-    if (done > 0) {
-      floatBadge.classList.remove('hidden');
-      floatBadge.textContent = done;
-    } else {
-      floatBadge.classList.add('hidden');
-    }
-  }
-
-  // ===== Toggle step =====
-  function toggleStep(index) {
-    checked[index] = !checked[index];
-    save();
-    syncAllUI();
-  }
-
-  function syncAllUI() {
-    // Step screen check buttons
-    document.querySelectorAll('.step-check').forEach(btn => {
-      const idx = parseInt(btn.dataset.step);
-      if (checked[idx]) {
-        btn.classList.add('done');
-        btn.textContent = '✓';
-      } else {
-        btn.classList.remove('done');
-        btn.textContent = '';
-      }
-    });
-    // Checklist overlay
-    clList.querySelectorAll('li').forEach((li, i) => {
-      li.classList.toggle('done', checked[i]);
-      li.querySelector('.cl-dot').textContent = checked[i] ? '✓' : '';
-    });
-    // Progress sidebar dots
-    updateSidebarDots();
-    updateChecklistProgress();
-  }
-
-  // ===== Sidebar dots active state =====
-  function updateSidebarDots() {
-    const screens = document.querySelectorAll('.screen[data-screen]');
-    const dots = progressSide.querySelectorAll('.p-dot');
-    // Find which screen is most visible
-    let bestIdx = 0, bestRatio = 0;
-    screens.forEach((sc, i) => {
-      const rect = sc.getBoundingClientRect();
-      const visibleH = Math.min(rect.bottom, window.innerHeight) - Math.max(rect.top, 0);
-      const ratio = visibleH > 0 ? visibleH / rect.height : 0;
-      if (ratio > bestRatio) { bestRatio = ratio; bestIdx = i; }
-    });
-    dots.forEach((d, i) => {
-      d.classList.toggle('active', i === bestIdx);
-      // Mark step screens as done if that step is checked
-      // screen 1-12 map to step 0-11
-      const screenNum = parseInt(screens[i].dataset.screen);
-      if (screenNum >= 1 && screenNum <= 12 && checked[screenNum - 1]) {
-        d.classList.add('done');
-      } else {
-        d.classList.remove('done');
-      }
-    });
-  }
-
-  // Dot click → scroll to screen
-  progressSide.addEventListener('click', (e) => {
-    const dot = e.target.closest('.p-dot');
-    if (!dot) return;
-    const idx = parseInt(dot.dataset.index);
-    const screens = document.querySelectorAll('.screen[data-screen]');
-    if (screens[idx]) {
-      screens[idx].scrollIntoView({ behavior: 'smooth' });
-    }
-  });
-
-  // ===== Step check button clicks =====
-  document.addEventListener('click', (e) => {
-    const btn = e.target.closest('.step-check');
-    if (!btn) return;
-    toggleStep(parseInt(btn.dataset.step));
-  });
-
-  // ===== Checklist overlay =====
-  floatCheckBtn.addEventListener('click', () => {
-    checklistOverlay.classList.add('open');
-    buildChecklist();
-  });
-  clClose.addEventListener('click', () => {
-    checklistOverlay.classList.remove('open');
-  });
-  checklistOverlay.addEventListener('click', (e) => {
-    if (e.target === checklistOverlay) checklistOverlay.classList.remove('open');
-  });
-  clList.addEventListener('click', (e) => {
-    const li = e.target.closest('li');
-    if (!li) return;
-    toggleStep(parseInt(li.dataset.step));
-  });
-
-  // ===== Envelope =====
-  envelopeBig.addEventListener('click', () => {
-    if (envelopeOpened) return;
-    envelopeOpened = true;
-    envelopeBig.classList.add('opened');
-    setTimeout(() => {
-      screenEnvelope.style.display = 'none';
-      screenLetter.classList.add('visible');
-      screenLetter.style.display = 'flex';
-      showLetterPage(0);
-      // Recalculate scroll snap
-      setTimeout(() => screenLetter.scrollIntoView({ behavior: 'smooth' }), 100);
-    }, 800);
-  });
-
-  // ===== Letter pages =====
-  function showLetterPage(page) {
-    currentLetterPage = page;
-    for (let i = 0; i < 3; i++) {
-      const el = document.getElementById('letterPage' + i);
-      if (el) el.classList.toggle('hidden', i !== page);
-    }
-    lPrev.disabled = page === 0;
-    lNext.disabled = page === 2;
-    lIndicator.textContent = `${page + 1} / 3`;
-  }
-  lPrev.addEventListener('click', () => { if (currentLetterPage > 0) showLetterPage(currentLetterPage - 1); });
-  lNext.addEventListener('click', () => { if (currentLetterPage < 2) showLetterPage(currentLetterPage + 1); });
-
-  // ===== Keyboard =====
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') checklistOverlay.classList.remove('open');
-  });
-
-  // ===== Scroll observer =====
-  let scrollTicking = false;
-  window.addEventListener('scroll', () => {
-    if (!scrollTicking) {
-      requestAnimationFrame(() => {
-        updateSidebarDots();
-        scrollTicking = false;
-      });
-      scrollTicking = true;
-    }
-  });
-
-  // ===== Init =====
-  buildProgressDots();
-  buildChecklist();
-  syncAllUI();
-  updateSidebarDots();
-
-})();
-</script>
-
+  </dialog>
 </body>
 </html>
