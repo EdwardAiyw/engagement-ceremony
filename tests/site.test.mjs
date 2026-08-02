@@ -64,3 +64,21 @@ test('the full letter remains in server-rendered HTML', async () => {
   assert.match(html, /艾毓灵/);
   assert.match(html, /现场话术/);
 });
+
+test('versioned state rejects mismatched arrays and clamps reader scale', async () => {
+  const { clampFontScale, normalizeState } = await import('../app.js');
+  const normalized = normalizeState({
+    formalChecks: [true],
+    scheduleChecks: [true, false, true, false],
+    letterOpened: true,
+    readerFontScale: 9,
+  });
+
+  assert.deepEqual(normalized.formalChecks, [false, false, false, false, false, false]);
+  assert.deepEqual(normalized.scheduleChecks, [true, false, true, false]);
+  assert.equal(normalized.letterOpened, true);
+  assert.equal(normalized.readerFontScale, 1);
+  assert.equal(clampFontScale(0.2), 0.9);
+  assert.equal(clampFontScale(2), 1.3);
+  assert.equal(clampFontScale(1.17), 1.2);
+});
