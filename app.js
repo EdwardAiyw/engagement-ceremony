@@ -51,21 +51,23 @@ function validChecks(value, length) {
 
 export function normalizeState(value) {
   const defaults = createDefaultState();
-  if (!value || typeof value !== 'object') return defaults;
+  const valid = value
+    && typeof value === 'object'
+    && validChecks(value.formalChecks, FORMAL_STEPS.length)
+    && validChecks(value.scheduleChecks, DAY_SCHEDULE.length)
+    && typeof value.letterOpened === 'boolean'
+    && typeof value.readerFontScale === 'number'
+    && Number.isFinite(value.readerFontScale)
+    && value.readerFontScale >= MIN_SCALE
+    && value.readerFontScale <= MAX_SCALE;
+
+  if (!valid) return defaults;
 
   return {
-    formalChecks: validChecks(value.formalChecks, FORMAL_STEPS.length)
-      ? [...value.formalChecks]
-      : defaults.formalChecks,
-    scheduleChecks: validChecks(value.scheduleChecks, DAY_SCHEDULE.length)
-      ? [...value.scheduleChecks]
-      : defaults.scheduleChecks,
-    letterOpened: typeof value.letterOpened === 'boolean'
-      ? value.letterOpened
-      : defaults.letterOpened,
-    readerFontScale: value.readerFontScale >= MIN_SCALE && value.readerFontScale <= MAX_SCALE
-      ? clampFontScale(value.readerFontScale)
-      : defaults.readerFontScale,
+    formalChecks: [...value.formalChecks],
+    scheduleChecks: [...value.scheduleChecks],
+    letterOpened: value.letterOpened,
+    readerFontScale: clampFontScale(value.readerFontScale),
   };
 }
 
@@ -89,6 +91,7 @@ let state = createDefaultState();
 let currentView = 'cover';
 let currentCardIndex = null;
 let wakeLock = null;
+let wakeLockHintShown = false;
 let statusTimer = null;
 
 const elements = {};
@@ -110,7 +113,10 @@ function setReaderStatus(message, timeout = 4200) {
 
 async function requestWakeLock() {
   if (!('wakeLock' in navigator)) {
-    setReaderStatus('朗读提示：请暂时关闭手机自动锁屏');
+    if (!wakeLockHintShown) {
+      setReaderStatus('朗读提示：请暂时关闭手机自动锁屏');
+      wakeLockHintShown = true;
+    }
     return;
   }
 
@@ -120,7 +126,10 @@ async function requestWakeLock() {
       wakeLock = null;
     });
   } catch {
-    setReaderStatus('朗读提示：请暂时关闭手机自动锁屏');
+    if (!wakeLockHintShown) {
+      setReaderStatus('朗读提示：请暂时关闭手机自动锁屏');
+      wakeLockHintShown = true;
+    }
   }
 }
 
@@ -137,11 +146,22 @@ async function releaseWakeLock() {
 function showView(id) {
   if (!elements.views.has(id)) return;
   currentView = id;
+  const activeView = elements.views.get(id);
 
   for (const [viewId, view] of elements.views) {
     const active = viewId === id;
     view.classList.toggle('is-active', active);
     view.setAttribute('aria-hidden', String(!active));
+  }
+
+  const heading = activeView.querySelector('h1, h2');
+  if (heading) {
+    const hadTabIndex = heading.hasAttribute('tabindex');
+    heading.setAttribute('tabindex', '-1');
+    heading.focus({ preventScroll: true });
+    if (!hadTabIndex) {
+      heading.addEventListener('blur', () => heading.removeAttribute('tabindex'), { once: true });
+    }
   }
 
   if (id === 'letter') {
@@ -306,6 +326,7 @@ function handleClick(event) {
   if (checkButton) {
     const index = Number.parseInt(checkButton.dataset.index, 10);
     if (checkButton.dataset.kind === 'formal') {
+      toggleCheck('formal', index);
       openFormalCard(index);
     } else {
       toggleCheck('schedule', index);

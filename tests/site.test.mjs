@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
+import { JSDOM } from 'jsdom';
 
 const root = new URL('../', import.meta.url);
 const read = (path) => readFile(new URL(path, root), 'utf8');
@@ -47,6 +48,7 @@ test('the page includes privacy, accessibility, and offline hooks', async () => 
 
   assert.match(html, /noindex, nofollow, noarchive/);
   assert.match(html, /aria-live="polite"/);
+  assert.doesNotMatch(html, /<section[^>]*data-view[^>]*aria-hidden="true"/);
   assert.match(app, /wakeLock\.request/);
   assert.match(app, /serviceWorker\.register/);
   for (const asset of ['./', './index.html', './styles.css', './app.js']) {
@@ -65,7 +67,7 @@ test('the full letter remains in server-rendered HTML', async () => {
   assert.match(html, /现场话术/);
 });
 
-test('versioned state rejects mismatched arrays and clamps reader scale', async () => {
+test('versioned state rejects the whole malformed payload and clamps reader scale', async () => {
   const { clampFontScale, normalizeState } = await import('../app.js');
   const normalized = normalizeState({
     formalChecks: [true],
@@ -75,10 +77,70 @@ test('versioned state rejects mismatched arrays and clamps reader scale', async 
   });
 
   assert.deepEqual(normalized.formalChecks, [false, false, false, false, false, false]);
-  assert.deepEqual(normalized.scheduleChecks, [true, false, true, false]);
-  assert.equal(normalized.letterOpened, true);
+  assert.deepEqual(normalized.scheduleChecks, [false, false, false, false]);
+  assert.equal(normalized.letterOpened, false);
   assert.equal(normalized.readerFontScale, 1);
+  assert.equal(normalizeState({
+    formalChecks: [false, false, false, false, false, false],
+    scheduleChecks: [false, false, false, false],
+    letterOpened: false,
+    readerFontScale: '1.2',
+  }).readerFontScale, 1);
   assert.equal(clampFontScale(0.2), 0.9);
   assert.equal(clampFontScale(2), 1.3);
   assert.equal(clampFontScale(1.17), 1.2);
+});
+
+test('two clicks open the letter, move focus, and formal activation checks the item', async () => {
+  const html = await read('index.html');
+  const dom = new JSDOM(html, { url: 'https://example.test/' });
+  let wakeRequests = 0;
+
+  dom.window.scrollTo = () => {};
+  dom.window.matchMedia = () => ({ matches: true });
+  dom.window.requestAnimationFrame = (callback) => callback();
+  Object.defineProperty(dom.window.navigator, 'wakeLock', {
+    configurable: true,
+    value: {
+      request: async () => {
+        wakeRequests += 1;
+        return {
+          addEventListener: () => {},
+          release: async () => {},
+        };
+      },
+    },
+  });
+
+  globalThis.window = dom.window;
+  globalThis.document = dom.window.document;
+  Object.defineProperty(globalThis, 'navigator', {
+    configurable: true,
+    value: dom.window.navigator,
+  });
+  globalThis.localStorage = dom.window.localStorage;
+
+  await import(`../app.js?dom-test=${Date.now()}`);
+
+  document.querySelector('[data-action="go-ready"]').click();
+  assert.ok(document.querySelector('#ready').classList.contains('is-active'));
+
+  document.querySelector('[data-action="start-ceremony"]').click();
+  await new Promise((resolve) => dom.window.setTimeout(resolve, 5));
+  const letter = document.querySelector('#letter');
+  assert.ok(letter.classList.contains('is-active'));
+  assert.equal(document.activeElement, letter.querySelector('h2'));
+  assert.equal(wakeRequests, 1);
+
+  document.querySelector('[data-action="continue-flow"]').click();
+  document.querySelector('#formalList .check-item').click();
+  const firstFormal = document.querySelector('#formalList .check-item');
+  assert.equal(firstFormal.getAttribute('aria-checked'), 'true');
+  assert.ok(document.querySelector('#formalCardDialog').hasAttribute('open'));
+
+  dom.window.close();
+  delete globalThis.window;
+  delete globalThis.document;
+  delete globalThis.navigator;
+  delete globalThis.localStorage;
 });
